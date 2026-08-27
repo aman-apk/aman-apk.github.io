@@ -3,7 +3,7 @@
 import io, json, os, re, sys
 sys.stdout.reconfigure(encoding="utf-8")
 
-ICONS = r"C:\Users\L\AppData\Local\Temp\claude\d--Aman-Labs-Ready\6b9af279-82b8-493b-97ec-b252c78b22c6\scratchpad\site_icons"
+ICONS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "site_icons")
 CATALOG = r"D:\Aman Labs\Ready\AmanStore\dist\catalog.json"
 OUT = r"D:\Aman Labs\Ready\AmanWeb\index.html"
 
