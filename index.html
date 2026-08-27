@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>أمان لابز — عائلة تطبيقات الخصوصية العربية</title>
+<title>مختبرات أمان — عائلة تطبيقات الخصوصية العربية</title>
 <meta name="description" content="أربعة عشر تطبيقًا عربيًا تعمل بلا إنترنت وبلا إعلانات وبلا تتبّع — بياناتك على جهازك وحده. نزّل متجر أمان وثبّت العائلة كلها.">
-<meta property="og:title" content="أمان لابز — عائلة تطبيقات الخصوصية العربية">
+<meta property="og:title" content="مختبرات أمان — عائلة تطبيقات الخصوصية العربية">
 <meta property="og:description" content="١٤ تطبيقًا عربيًا: بلا إعلانات، بلا تتبّع، بلا سحابة — وأكثرها يعمل دون اتصالٍ بالإنترنت.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'%3E%3Crect width='108' height='108' rx='24' fill='%23131826'/%3E%3Ccircle cx='54' cy='54' r='20' fill='%23E0A32E'/%3E%3C/svg%3E">
@@ -151,6 +151,26 @@
                     box-shadow:0 8px 26px rgba(0,0,0,.4); transition:transform .2s; }
   .t-visual .tile:hover { transform:scale(1.06); }
 
+  /* خدماتنا — بروح بنر المتجر: توهّج عنبري و«فكرة» ذهبية وزر محدَّد */
+  .svc { margin-top:38px; position:relative; border-radius:24px; padding:36px;
+         background:
+           radial-gradient(560px 320px at 88% 0%, rgba(224,163,46,.20), transparent 60%),
+           linear-gradient(135deg, var(--panel2), var(--panel) 70%);
+         border:1px solid rgba(224,163,46,.35); overflow:hidden; }
+  .svc-body { color:#D8DCE8; font-size:16.5px; max-width:44em; line-height:1.95; }
+  .svc-feats { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px; margin-top:24px; }
+  .svc-f { display:flex; align-items:center; gap:10px; background:rgba(11,14,21,.5);
+           border:1px solid var(--line); border-radius:14px; padding:13px 16px; font-size:13.5px; }
+  .svc-f span { font-size:18px; }
+  .svc-cta { border-color:rgba(224,163,46,.6); color:var(--gold); }
+  .svc-cta:hover { background:rgba(224,163,46,.1); border-color:var(--gold); }
+  .svc-strip { margin-top:16px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
+               padding:20px 24px; display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+  .svc-strip p { color:var(--muted); font-size:13.5px; max-width:46em; }
+  .svc-strip b { color:var(--ink); }
+  .svc-strip a { margin-inline-start:auto; color:var(--gold); font-size:13.5px; font-weight:800;
+                 border-bottom:1px dashed rgba(224,163,46,.4); padding-bottom:2px; white-space:nowrap; }
+
   footer { padding:52px 0 40px; border-top:1px solid var(--line); }
   .f-in { display:flex; gap:26px; align-items:center; flex-wrap:wrap; }
   .f-note { color:var(--muted); font-size:12.5px; margin-inline-start:auto; text-align:end; }
@@ -185,10 +205,10 @@
 
 <nav>
   <div class="nav-in">
-    <a class="brand" href="#top"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-store"/></svg> أمان لابز</a>
+    <a class="brand" href="#top"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-store"/></svg> مختبرات أمان</a>
     <div class="navlinks">
       <a href="#apps">التطبيقات</a><a href="#principles">مبادئنا</a>
-      <a href="#pc">للحاسوب</a><a href="#trust">الثقة</a>
+      <a href="#pc">للحاسوب</a><a href="#services">خدماتنا</a><a href="#trust">الثقة</a>
     </div>
     <a class="nav-cta" data-store-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/amanstore-1.24.17.apk">نزّل المتجر</a>
   </div>
@@ -428,6 +448,30 @@
   </div>
 </section>
 
+<section id="services" style="padding-top:10px">
+  <div class="wrap">
+    <p class="sec-k">خدماتنا</p>
+    <h2>لديك <span style="color:var(--gold)">فكرة</span> تطبيق؟ ننفّذها لك</h2>
+    <div class="svc reveal">
+      <div class="svc-main">
+        <p class="svc-body">تبحث عن جهةٍ تنفّذها؟ نبني المواقع والتطبيقات من الفكرة إلى الإطلاق — والدليل أمامك: هذه العائلة كلها صنعتُنا. أرسل فكرتك، ونعود إليك بخطةٍ وسعرٍ واضحين قبل أي التزام.</p>
+        <div class="svc-feats">
+          <div class="svc-f"><span>🧩</span>مواقع وتطبيقات ومتاجر وأنظمة خاصة</div>
+          <div class="svc-f"><span>🚀</span>تنفيذ كامل: تصميم وبرمجة ونشر</div>
+          <div class="svc-f"><span>🤝</span>سعر منافس يُتَّفق عليه قبل البدء</div>
+        </div>
+        <div class="ctas" style="margin-top:26px">
+          <a class="btn btn-ghost svc-cta" href="https://wa.me/963980690860?text=%D8%B7%D9%84%D8%A8%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%20%D8%AE%D8%A7%D8%B5%3A%20" rel="noopener">أرسل فكرتك عبر واتساب</a>
+        </div>
+      </div>
+    </div>
+    <div class="svc-strip reveal">
+      <p>أمان مشروعٌ مستقل لا يقصد الربح: لا إعلانات، ولا ثمن خفيّ. تطبيقاته كاملة للجميع دوماً، ودعمكم الاختياري يُبقيها كذلك — <b>ستُتاح طرق المساهمة قريباً</b>، لمزيدٍ من مشاريع الخصوصية: شات، تخزين سحابي آمن، VPN…</p>
+      <a href="https://wa.me/963980690860?text=%D8%A8%D9%84%D8%A7%D8%BA%20%D9%85%D8%B4%D9%83%D9%84%D8%A9%3A%20" rel="noopener">واجهتك مشكلة في تطبيق؟ أبلغنا عنها ↲</a>
+    </div>
+  </div>
+</section>
+
 <section id="trust" class="trust">
   <div class="wrap trust-in">
     <div>
@@ -454,7 +498,7 @@
 
 <footer>
   <div class="wrap f-in">
-    <a class="brand" href="#top"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-store"/></svg> أمان لابز</a>
+    <a class="brand" href="#top"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-store"/></svg> مختبرات أمان</a>
     <div class="f-links">
       <a href="https://wa.me/963980690860" rel="noopener">تواصل واتساب</a>
       <a href="https://github.com/aman-apk" rel="noopener">GitHub</a>
