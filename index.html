@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>أمان لابز — عائلة تطبيقات الخصوصية العربية</title>
+<meta name="description" content="أربعة عشر تطبيقًا عربيًا تعمل بلا إنترنت وبلا إعلانات وبلا تتبّع — بياناتك على جهازك وحده. نزّل متجر أمان وثبّت العائلة كلها.">
+<meta property="og:title" content="أمان لابز — عائلة تطبيقات الخصوصية العربية">
+<meta property="og:description" content="١٤ تطبيقًا عربيًا: بلا إعلانات، بلا تتبّع، بلا سحابة. الكثير منها لا يملك إذن الإنترنت أصلًا.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'%3E%3Crect width='108' height='108' rx='24' fill='%23131826'/%3E%3Ccircle cx='54' cy='54' r='20' fill='%23E0A32E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night:#0B0E15; --night2:#10141f; --panel:#131826; --panel2:#171d2e;
+    --ink:#F2EDE3; --muted:#98A1B3; --gold:#E0A32E; --gold-deep:#B87708;
+    --line:rgba(242,237,227,.09); --maxw:1180px;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Almarai',system-ui,sans-serif; background:var(--night); color:var(--ink); overflow-x:hidden; line-height:1.7; }
+  ::selection { background:var(--gold); color:#221a05; }
+  a { color:inherit; text-decoration:none; }
+  .wrap { max-width:var(--maxw); margin:0 auto; padding:0 22px; }
+
+  /* ══ nav ══ */
+  nav { position:fixed; inset-inline:0; top:0; z-index:50; backdrop-filter:blur(14px);
+        background:rgba(11,14,21,.72); border-bottom:1px solid var(--line); }
+  .nav-in { max-width:var(--maxw); margin:0 auto; padding:10px 22px; display:flex; align-items:center; gap:26px; }
+  .brand { display:flex; align-items:center; gap:11px; font-weight:800; font-size:19px; }
+  .brand .tile { width:34px; height:34px; border-radius:9px; }
+  .navlinks { display:flex; gap:22px; font-size:14px; color:var(--muted); margin-inline-start:auto; }
+  .navlinks a:hover { color:var(--ink); }
+  .nav-cta { background:var(--gold); color:#221a05; font-weight:800; font-size:13.5px;
+             padding:8px 18px; border-radius:999px; white-space:nowrap; }
+  .nav-cta:hover { background:#EDB84A; }
+
+  /* ══ hero ══ */
+  header { position:relative; min-height:min(100svh, 940px); display:flex; align-items:center; overflow:hidden;
+           background:
+             radial-gradient(1100px 700px at 85% -8%, rgba(224,163,46,.16), transparent 62%),
+             radial-gradient(900px 600px at 12% 110%, rgba(92,113,133,.20), transparent 60%),
+             linear-gradient(160deg, #121826 0%, var(--night) 55%, #0A0C12 100%); }
+  .stars, .stars2 { position:absolute; inset:0; pointer-events:none; }
+  .stars { box-shadow:none; }
+  .star { position:absolute; width:2px; height:2px; border-radius:50%; background:#fff; opacity:.5;
+          animation:tw 4.2s ease-in-out infinite; }
+  @keyframes tw { 0%,100% { opacity:.14; } 50% { opacity:.62; } }
+  .orb { position:absolute; opacity:.5; filter:saturate(.85);
+         animation:float 9s ease-in-out infinite; will-change:transform; }
+  .orb .tile { width:100%; height:auto; border-radius:24%; box-shadow:0 10px 34px rgba(0,0,0,.45); }
+  @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-14px); } }
+  .hero-in { position:relative; z-index:2; max-width:var(--maxw); margin:0 auto; padding:120px 22px 80px; }
+  .kicker { color:var(--gold); font-weight:800; letter-spacing:.5px; font-size:15px; margin-bottom:14px; }
+  h1 { font-size:clamp(34px, 6vw, 64px); font-weight:800; line-height:1.25; max-width:14em; }
+  .sub { color:var(--muted); font-size:clamp(15px,2vw,18.5px); max-width:34em; margin:22px 0 34px; }
+  .sub b { color:var(--ink); }
+  .ctas { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+  .btn { display:inline-flex; align-items:center; gap:9px; font-weight:800; border-radius:14px;
+         padding:15px 28px; font-size:16px; transition:transform .15s, box-shadow .15s; }
+  .btn:active { transform:scale(.97); }
+  .btn-gold { background:linear-gradient(135deg,#EDB84A,var(--gold)); color:#221a05;
+              box-shadow:0 8px 28px rgba(224,163,46,.28); }
+  .btn-gold:hover { box-shadow:0 10px 36px rgba(224,163,46,.42); transform:translateY(-2px); }
+  .btn-ghost { border:1.5px solid var(--line); color:var(--ink); }
+  .btn-ghost:hover { border-color:rgba(224,163,46,.5); }
+  .chips { display:flex; gap:10px; flex-wrap:wrap; margin-top:38px; }
+  .chip { border:1px solid var(--line); background:rgba(19,24,38,.6); color:var(--muted);
+          border-radius:999px; padding:7px 16px; font-size:13px; }
+  .chip b { color:var(--gold); font-size:14.5px; }
+
+  /* ══ sections ══ */
+  section { padding:88px 0; position:relative; }
+  .sec-k { color:var(--gold); font-weight:800; font-size:14px; margin-bottom:8px; }
+  h2 { font-size:clamp(26px,3.6vw,38px); font-weight:800; margin-bottom:12px; }
+  .lead { color:var(--muted); max-width:38em; font-size:16px; }
+
+  /* المبادئ */
+  .prin { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:42px; }
+  .p-card { background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:24px; }
+  .p-card .ic { width:46px; height:46px; border-radius:13px; display:grid; place-items:center;
+               background:rgba(224,163,46,.12); color:var(--gold); margin-bottom:14px; }
+  .p-card h3 { font-size:17px; margin-bottom:6px; }
+  .p-card p { color:var(--muted); font-size:13.5px; }
+
+  /* بطاقة المتجر */
+  .store-card { margin-top:46px; background:linear-gradient(135deg, rgba(224,163,46,.14), rgba(19,24,38,.9) 45%);
+               border:1px solid rgba(224,163,46,.35); border-radius:24px; padding:34px;
+               display:flex; gap:28px; align-items:center; flex-wrap:wrap; }
+  .store-card .tile { width:104px; height:104px; border-radius:24px; flex-shrink:0;
+                      box-shadow:0 12px 40px rgba(0,0,0,.5); }
+  .store-card h3 { font-size:24px; } .store-card .en { color:var(--muted); font-size:13px; }
+  .store-card p.d { color:var(--muted); margin:8px 0 0; max-width:34em; }
+  .store-cta { margin-inline-start:auto; text-align:center; }
+  .store-cta .meta { display:block; color:var(--muted); font-size:12.5px; margin-top:9px; }
+
+  /* شبكة التطبيقات */
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:18px; margin-top:38px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:22px;
+          display:flex; flex-direction:column; gap:14px; transition:transform .22s, border-color .22s, box-shadow .22s; }
+  .card:hover { transform:translateY(-6px); border-color:color-mix(in srgb, var(--ac) 55%, transparent);
+               box-shadow:0 18px 44px -18px color-mix(in srgb, var(--ac) 55%, transparent); }
+  .card-head { display:flex; gap:14px; align-items:center; }
+  .card .tile { width:64px; height:64px; border-radius:15px; flex-shrink:0; box-shadow:0 6px 20px rgba(0,0,0,.35); }
+  .card h3 { font-size:19px; }
+  .card .tag { color:var(--muted); font-size:12.5px; }
+  .card .sum { font-size:14.5px; color:#C8CEDC; }
+  .feats { display:flex; flex-wrap:wrap; gap:7px; }
+  .feats span { font-size:11.5px; color:var(--muted); border:1px solid var(--line);
+               border-radius:999px; padding:4px 11px; }
+  .card-foot { margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .meta { color:var(--muted); font-size:12.5px; } .meta b { color:var(--ink); }
+  .dl { font-weight:800; font-size:13.5px; padding:9px 20px; border-radius:11px;
+        background:color-mix(in srgb, var(--ac) 26%, var(--panel2)); color:var(--ink);
+        border:1px solid color-mix(in srgb, var(--ac) 45%, transparent); transition:background .18s; }
+  .dl:hover { background:color-mix(in srgb, var(--ac) 42%, var(--panel2)); }
+
+  /* الحاسوب */
+  .pc { margin-top:42px; background:linear-gradient(135deg,#232f3d,#141a24 60%);
+        border:1px solid rgba(92,113,133,.4); border-radius:24px; padding:36px;
+        display:flex; gap:30px; align-items:center; flex-wrap:wrap; }
+  .pc .tile { width:96px; height:96px; border-radius:22px; box-shadow:0 12px 40px rgba(0,0,0,.5); }
+  .pc h3 { font-size:22px; } .pc p { color:var(--muted); max-width:30em; margin-top:6px; font-size:14.5px; }
+  .pc-btns { margin-inline-start:auto; display:flex; flex-direction:column; gap:10px; }
+  .pc-btns .btn { padding:12px 24px; font-size:14.5px; justify-content:center; }
+  .pc-note { color:var(--muted); font-size:12px; text-align:center; }
+
+  /* كيف يصلك */
+  .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:42px; counter-reset:st; }
+  .step { background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:26px; position:relative; }
+  .step::before { counter-increment:st; content:counter(st); position:absolute; top:-16px; inset-inline-start:22px;
+                 width:34px; height:34px; border-radius:50%; background:var(--gold); color:#221a05;
+                 font-weight:800; display:grid; place-items:center; font-size:16px; }
+  .step h3 { margin:8px 0 6px; font-size:17px; } .step p { color:var(--muted); font-size:13.5px; }
+
+  /* الثقة */
+  .trust { background:linear-gradient(180deg, var(--night2), var(--night)); border-block:1px solid var(--line); }
+  .trust-in { display:grid; grid-template-columns:1.1fr 1fr; gap:44px; align-items:center; }
+  .t-list { display:flex; flex-direction:column; gap:16px; margin-top:26px; }
+  .t-item { display:flex; gap:13px; align-items:flex-start; }
+  .t-item .ic { flex-shrink:0; width:38px; height:38px; border-radius:11px; display:grid; place-items:center;
+               background:rgba(224,163,46,.12); color:var(--gold); }
+  .t-item b { display:block; font-size:15.5px; }
+  .t-item p { color:var(--muted); font-size:13px; }
+  .t-links { margin-top:26px; display:flex; gap:16px; flex-wrap:wrap; font-size:13.5px; }
+  .t-links a { color:var(--gold); border-bottom:1px dashed rgba(224,163,46,.4); padding-bottom:2px; }
+  .t-visual { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; direction:ltr; }
+  .t-visual .tile { width:100%; height:auto; border-radius:20%; opacity:.92;
+                    box-shadow:0 8px 26px rgba(0,0,0,.4); transition:transform .2s; }
+  .t-visual .tile:hover { transform:scale(1.06); }
+
+  footer { padding:52px 0 40px; border-top:1px solid var(--line); }
+  .f-in { display:flex; gap:26px; align-items:center; flex-wrap:wrap; }
+  .f-note { color:var(--muted); font-size:12.5px; margin-inline-start:auto; text-align:end; }
+  .f-links { display:flex; gap:18px; font-size:13.5px; color:var(--muted); }
+  .f-links a:hover { color:var(--gold); }
+
+  .reveal { opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity:1; transform:none; }
+
+  @media (max-width: 900px) {
+    .navlinks { display:none; }
+    .trust-in { grid-template-columns:1fr; }
+    .orb { display:none; }
+    .orb:nth-child(-n+5) { display:block; opacity:.3; }
+    .store-cta, .pc-btns { margin-inline-start:0; width:100%; }
+    .pc-btns { flex-direction:row; flex-wrap:wrap; }
+    header { min-height:auto; }
+    .hero-in { padding:110px 22px 64px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .star, .orb { animation:none; }
+    .reveal { opacity:1; transform:none; transition:none; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="i-store"><path fill="#10121D" d="M0,0h108v108h-108z"/><path fill="#FFFFFF" fill-opacity="0.30" d="M23,21a1.2,1.2 0 1 0 2.4,0a1.2,1.2 0 1 0 -2.4,0"/><path fill="#FFFFFF" fill-opacity="0.22" d="M86,84a1,1 0 1 0 2,0a1,1 0 1 0 -2,0"/><path fill="#E0A32E" d="M54,41L63,29L54,14L45,29Z"/><path fill="#F0CD7A" d="M54,41L59,34L54,26L49,34Z"/><g transform="rotate(45 54 54)"><path fill="#3FC0C4" d="M54,41L63,29L54,14L45,29Z"/><path fill="#9FE3E5" d="M54,41L59,34L54,26L49,34Z"/></g><g transform="rotate(90 54 54)"><path fill="#D97C93" d="M54,41L63,29L54,14L45,29Z"/><path fill="#EBB3C1" d="M54,41L59,34L54,26L49,34Z"/></g><g transform="rotate(135 54 54)"><path fill="#94A356" d="M54,41L63,29L54,14L45,29Z"/><path fill="#C6D19A" d="M54,41L59,34L54,26L49,34Z"/></g><g transform="rotate(180 54 54)"><path fill="#7C89CF" d="M54,41L63,29L54,14L45,29Z"/><path fill="#D5DBF0" d="M54,41L59,34L54,26L49,34Z"/></g><g transform="rotate(225 54 54)"><path fill="#C4764E" d="M54,41L63,29L54,14L45,29Z"/><path fill="#E5A98A" d="M54,41L59,34L54,26L49,34Z"/></g><g transform="rotate(270 54 54)"><path fill="#97C98B" d="M54,41L63,29L54,14L45,29Z"/><path fill="#C6E7BE" d="M54,41L59,34L54,26L49,34Z"/></g><g transform="rotate(315 54 54)"><path fill="#9D85C4" d="M54,41L63,29L54,14L45,29Z"/><path fill="#C9BCE4" d="M54,41L59,34L54,26L49,34Z"/></g><path fill="#FDF3D8" d="M45,54a9,9 0 1 0 18,0a9,9 0 1 0 -18,0"/></g><g id="i-kalamboard"><defs><linearGradient id="kalamboard_sky" x1="20" y1="0" x2="88" y2="108" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#D9A93E"/><stop offset="0.5" stop-color="#AE7E23"/><stop offset="1.0" stop-color="#6F4E12"/></linearGradient><radialGradient id="kalamboard_dawn" cx="30" cy="20" r="115" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#F7E8C2" stop-opacity="0.30"/><stop offset="0.45" stop-color="#F7E8C2" stop-opacity="0.14"/><stop offset="0.85" stop-color="#F7E8C2" stop-opacity="0.05"/><stop offset="1.0" stop-color="#F7E8C2" stop-opacity="0.00"/></radialGradient></defs><path d="M0,0h108v108h-108z" fill="url(#kalamboard_sky)"/><path d="M0,0h108v108h-108z" fill="url(#kalamboard_dawn)"/><g transform="translate(54 54) scale(0.98) translate(-54 -54)"><path fill="#FDF3D8" fill-rule="evenodd" d="M37,30h34a13,13 0 0 1 13,13v18a13,13 0 0 1 -13,13H37a13,13 0 0 1 -13,-13V43a13,13 0 0 1 13,-13z M38,35h32a9,9 0 0 1 9,9v14a9,9 0 0 1 -9,9H38a9,9 0 0 1 -9,-9V44a9,9 0 0 1 9,-9z"/><path fill="#FDF3D8" d="M38,73L33,81L53,73Z"/><path fill="#F6E1A8" d="M36.5,41h5a2.5,2.5 0 0 1 2.5,2.5v5a2.5,2.5 0 0 1 -2.5,2.5h-5a2.5,2.5 0 0 1 -2.5,-2.5v-5a2.5,2.5 0 0 1 2.5,-2.5z M51.5,41h5a2.5,2.5 0 0 1 2.5,2.5v5a2.5,2.5 0 0 1 -2.5,2.5h-5a2.5,2.5 0 0 1 -2.5,-2.5v-5a2.5,2.5 0 0 1 2.5,-2.5z M66.5,41h5a2.5,2.5 0 0 1 2.5,2.5v5a2.5,2.5 0 0 1 -2.5,2.5h-5a2.5,2.5 0 0 1 -2.5,-2.5v-5a2.5,2.5 0 0 1 2.5,-2.5z"/><path fill="#F6E1A8" d="M38,56h32a4,4 0 0 1 4,4a4,4 0 0 1 -4,4H38a4,4 0 0 1 -4,-4a4,4 0 0 1 4,-4z"/><path fill="#FBF2D9" d="M35.75,57h36.5a1.75,1.75 0 0 1 1.75,1.75a1.75,1.75 0 0 1 -1.75,1.75H35.75a1.75,1.75 0 0 1 -1.75,-1.75a1.75,1.75 0 0 1 1.75,-1.75z"/><path fill="none" stroke="#FFFDF2" stroke-opacity="0.68" stroke-width="1.2" d="M39,31 L69,31"/></g><path fill="#FFFFFF" fill-opacity="0.48" d="M24,24m-1.2,0a1.2,1.2 0 1 1 2.4,0a1.2,1.2 0 1 1 -2.4,0"/><path fill="#FFFFFF" fill-opacity="0.41" d="M88,82m-1,0a1,1 0 1 1 2,0a1,1 0 1 1 -2,0"/></g><g id="i-mihrab"><defs><linearGradient id="mihrab_sky" x1="20" y1="0" x2="88" y2="108" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#4A55A8"/><stop offset="0.5" stop-color="#2E3778"/><stop offset="1" stop-color="#171D4A"/></linearGradient><radialGradient id="mihrab_dawn" cx="30" cy="20" r="115" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#D0D6F2" stop-opacity="0.30"/><stop offset="0.45" stop-color="#D0D6F2" stop-opacity="0.14"/><stop offset="0.85" stop-color="#D0D6F2" stop-opacity="0.05"/><stop offset="1.0" stop-color="#D0D6F2" stop-opacity="0"/></radialGradient></defs><path d="M0,0h108v108h-108z" fill="url(#mihrab_sky)"/><path d="M0,0h108v108h-108z" fill="url(#mihrab_dawn)"/><g transform="translate(54 54) scale(0.98) translate(-54 -54)"><path fill="#FDF3D8" d="M32,82L32,56A22,22 0 0 1 76,56L76,82L71.5,82L71.5,56.8A17.5,17.5 0 0 0 36.5,56.8L36.5,82Z"/><path fill="#ACB5DB" d="M43,82L43,60A11,11 0 0 1 65,60L65,82Z"/><path fill="#D5DBF0" d="M50.4,26 a3.6,3.6 0 1,0 7.2,0 a3.6,3.6 0 1,0 -7.2,0 Z
+                              M39.2,30 a2.8,2.8 0 1,0 5.6,0 a2.8,2.8 0 1,0 -5.6,0 Z
+                              M63.2,30 a2.8,2.8 0 1,0 5.6,0 a2.8,2.8 0 1,0 -5.6,0 Z
+                              M31.6,38 a2.4,2.4 0 1,0 4.8,0 a2.4,2.4 0 1,0 -4.8,0 Z
+                              M71.6,38 a2.4,2.4 0 1,0 4.8,0 a2.4,2.4 0 1,0 -4.8,0 Z"/><path fill="none" stroke="#FFFDF2" stroke-opacity=".68" stroke-width="1.2" d="M40.5,39.9 A21,21 0 0 1 67.5,39.9"/></g><path fill="#FFFFFF" fill-opacity="0.48" d="M22.8,80 a1.2,1.2 0 1,0 2.4,0 a1.2,1.2 0 1,0 -2.4,0 Z"/><path fill="#FFFFFF" fill-opacity="0.41" d="M85,22 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0 Z"/></g><g id="i-album"><defs><linearGradient id="album_sky" x1="20" y1="0" x2="88" y2="108" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#6FA8DC"/><stop offset="0.5" stop-color="#2A6FB0"/><stop offset="1.0" stop-color="#17436F"/></linearGradient><radialGradient id="album_dawn" cx="30" cy="20" r="115" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#DDEAF8" stop-opacity="0.30"/><stop offset="0.45" stop-color="#DDEAF8" stop-opacity="0.14"/><stop offset="0.85" stop-color="#DDEAF8" stop-opacity="0.05"/><stop offset="1.0" stop-color="#DDEAF8" stop-opacity="0"/></radialGradient></defs><path d="M0,0h108v108h-108z" fill="url(#album_sky)"/><path d="M0,0h108v108h-108z" fill="url(#album_dawn)"/><g transform="translate(54 54) scale(0.98) translate(-54 -54)"><path fill="#FDF3D8" fill-rule="evenodd" d="M36,28 h36 a6,6 0 0 1 6,6 v40 a6,6 0 0 1 -6,6 h-36 a6,6 0 0 1 -6,-6 v-40 a6,6 0 0 1 6,-6 z M37.5,29.2 L40.5,29.2 L40.5,78.8 L37.5,78.8 Z M49,68 h20 a2.5,2.5 0 0 1 0,5 h-20 a2.5,2.5 0 0 1 0,-5 z"/><path fill="#7FB9E6" d="M59,50 m-14,0 a14,14 0 1 1 28,0 a14,14 0 1 1 -28,0 z"/><path fill="#FDF3D8" d="M55.5,42.5 L55.5,57.5 L68,50 Z"/><path fill="none" stroke="#FFFDF2" stroke-opacity="0.68" stroke-width="1.2" d="M36,29 L72,29"/></g><path fill="#FFFFFF" fill-opacity="0.48" d="M20,16 a1.1,1.1 0 1 0 2.2,0 a1.1,1.1 0 1 0 -2.2,0"/><path fill="#FFFFFF" fill-opacity="0.41" d="M87,26 a0.9,0.9 0 1 0 1.8,0 a0.9,0.9 0 1 0 -1.8,0"/></g><g id="i-ruznama"><defs><linearGradient id="ruznama_sky" x1="20" y1="0" x2="88" y2="108" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#428B56"/><stop offset="0.5" stop-color="#235C34"/><stop offset="1.0" stop-color="#103624"/></linearGradient><radialGradient id="ruznama_dawn" cx="30" cy="20" r="115" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#E4F2E6" stop-opacity="0.34"/><stop offset="0.45" stop-color="#E4F2E6" stop-opacity="0.15"/><stop offset="0.85" stop-color="#E4F2E6" stop-opacity="0.05"/><stop offset="1.0" stop-color="#E4F2E6" stop-opacity="0"/></radialGradient></defs><path d="M0,0h108v108h-108z" fill="url(#ruznama_sky)"/><path d="M0,0h108v108h-108z" fill="url(#ruznama_dawn)"/><g transform="translate(54 54) scale(0.98) translate(-54 -54)"><path fill="#FDF3D8" d="M43.5,22 h0.0 a2.5,2.5 0 0 1 2.5,2.5 v7.0 a2.5,2.5 0 0 1 -2.5,2.5 h-0.0 a2.5,2.5 0 0 1 -2.5,-2.5 v-7.0 a2.5,2.5 0 0 1 2.5,-2.5 z"/><path fill="#FDF3D8" d="M64.5,22 h0.0 a2.5,2.5 0 0 1 2.5,2.5 v7.0 a2.5,2.5 0 0 1 -2.5,2.5 h-0.0 a2.5,2.5 0 0 1 -2.5,-2.5 v-7.0 a2.5,2.5 0 0 1 2.5,-2.5 z"/><path fill="#FDF3D8" d="M31,29 h46 a7,7 0 0 1 7,7 v36 a7,7 0 0 1 -7,7 h-46 a7,7 0 0 1 -7,-7 v-36 a7,7 0 0 1 7,-7 z"/><g transform="translate(0 -2.3)"><path fill="#235C34" d="M52.48219273743017 33.8V43.31745810055865L51.338337988826815 44.3H50.22381284916201V36.41033519553072L48.625349162011176 37.73016759776536L47.59881284916201 36.439664804469274L50.64909217877095 33.8Z"/><path fill="#235C34" d="M54.34462290502793 34.606564245810056Q55.73777932960894 33.68268156424581 57.18959497206704 33.68268156424581Q58.700069832402235 33.68268156424581 59.49196927374302 34.606564245810056Q60.16655027932961 35.38379888268156 60.16655027932961 36.67430167597765Q60.16655027932961 37.51019553072626 59.770600558659225 38.324092178770954Q59.37465083798883 39.13798882681564 58.31878491620112 40.443156424581005Q57.70286312849162 41.23505586592179 57.62953910614525 41.29371508379888L56.55900837988827 42.408240223463686H60.38652234636872V43.141480446927375L59.47730446927375 44.3H53.963337988826815V42.408240223463686L55.00453910614525 41.41103351955307L55.95775139664805 40.384497206703905Q57.26291899441341 39.006005586592174 57.72486033519553 38.258100558659216Q58.186801675977655 37.51019553072626 58.186801675977655 36.79162011173184Q58.186801675977655 35.67709497206704 56.808310055865924 35.67709497206704Q56.148393854748605 35.67709497206704 55.42981843575419 36.16103351955307Z"/></g><path fill="#235C34" d="M24,44.5 h60 v2.6 h-60 z"/><path fill="#235C34" d="M35.5,52 h4 a2,2 0 0 1 2,2 v4 a2,2 0 0 1 -2,2 h-4 a2,2 0 0 1 -2,-2 v-4 a2,2 0 0 1 2,-2 z"/><path fill="#235C34" d="M46.5,52 h4 a2,2 0 0 1 2,2 v4 a2,2 0 0 1 -2,2 h-4 a2,2 0 0 1 -2,-2 v-4 a2,2 0 0 1 2,-2 z"/><path fill="#235C34" d="M57.5,52 h4 a2,2 0 0 1 2,2 v4 a2,2 0 0 1 -2,2 h-4 a2,2 0 0 1 -2,-2 v-4 a2,2 0 0 1 2,-2 z"/><path fill="#235C34" d="M68.5,52 h4 a2,2 0 0 1 2,2 v4 a2,2 0 0 1 -2,2 h-4 a2,2 0 0 1 -2,-2 v-4 a2,2 0 0 1 2,-2 z"/><path fill="#235C34" d="M35.5,63 h4 a2,2 0 0 1 2,2 v4 a2,2 0 0 1 -2,2 h-4 a2,2 0 0 1 -2,-2 v-4 a2,2 0 0 1 2,-2 z"/><path fill="#235C34" d="M46.5,63 h4 a2,2 0 0 1 2,2 v4 a2,2 0 0 1 -2,2 h-4 a2,2 0 0 1 -2,-2 v-4 a2,2 0 0 1 2,-2 z"/><path fill="#235C34" d="M57.5,63 h4 a2,2 0 0 1 2,2 v4 a2,2 0 0 1 -2,2 h-4 a2,2 0 0 1 -2,-2 v-4 a2,2 0 0 1 2,-2 z"/><path fill="#E0A32E" d="M68.5,63 h4 a2,2 0 0 1 2,2 v4 a2,2 0 0 1 -2,2 h-4 a2,2 0 0 1 -2,-2 v-4 a2,2 0 0 1 2,-2 z"/></g><path fill="#FFFFFF" fill-opacity="0.48" d="M20,16 a1.1,1.1 0 1 0 2.2,0 a1.1,1.1 0 1 0 -2.2,0"/><path fill="#FFFFFF" fill-opacity="0.41" d="M87,26 a0.9,0.9 0 1 0 1.8,0 a0.9,0.9 0 1 0 -1.8,0"/></g><g id="i-hisn"><defs><linearGradient id="hisn_sky" x1="20" y1="0" x2="88" y2="108" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#E2A275"/><stop offset="0.5" stop-color="#C4764E"/><stop offset="1.0" stop-color="#8F4E2E"/></linearGradient><radialGradient id="hisn_dawn" cx="30" cy="20" r="115" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#FFF6E0" stop-opacity="0.30"/><stop offset="0.45" stop-color="#FFF6E0" stop-opacity="0.14"/><stop offset="0.85" stop-color="#FFF6E0" stop-opacity="0.05"/><stop offset="1.0" stop-color="#FFF6E0" stop-opacity="0"/></radialGradient></defs><path d="M0,0h108v108h-108z" fill="url(#hisn_sky)"/><path d="M0,0h108v108h-108z" fill="url(#hisn_dawn)"/><g transform="translate(54 54) scale(0.98) translate(-54 -54)"><path fill="#FDF3D8" fill-rule="evenodd" d="M41,26 L48,26 L48,32.5 L50.5,32.5 L50.5,26 L57.5,26 L57.5,32.5 L60,32.5 L60,26 L67,26 L67,76 L41,76 Z M49,50 a5,5 0 1 0 10,0 a5,5 0 1 0 -10,0 Z M52,54.3 L56,54.3 L57.5,63 L50.5,63 Z"/><path fill="#FDF3D8" d="M37,76 L71,76 L71,80 L37,80 Z"/><path fill="#E5A98A" d="M50.5,26 L57.5,26 L57.5,32.5 L50.5,32.5 Z"/><path fill="none" stroke="#FFFDF2" stroke-opacity="0.75" stroke-width="1.2" d="M41,27 L48,27 M50.5,27 L57.5,27 M60,27 L67,27"/></g><path fill="#FFFFFF" fill-opacity="0.48" d="M20,16 a1.1,1.1 0 1 0 2.2,0 a1.1,1.1 0 1 0 -2.2,0"/><path fill="#FFFFFF" fill-opacity="0.41" d="M87,26 a0.9,0.9 0 1 0 1.8,0 a0.9,0.9 0 1 0 -1.8,0"/></g><g id="i-wathaiq"><defs><linearGradient id="wathaiq_sky" x1="20" y1="0" x2="88" y2="108" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#A98A5C"/><stop offset="0.5" stop-color="#7A5A38"/><stop offset="1.0" stop-color="#46311C"/></linearGradient><radialGradient id="wathaiq_dawn" cx="30" cy="20" r="115" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#F4EBDA" stop-opacity="0.30"/><stop offset="0.45" stop-color="#F4EBDA" stop-opacity="0.14"/><stop offset="0.85" stop-color="#F4EBDA" stop-opacity="0.05"/><stop offset="1.0" stop-color="#F4EBDA" stop-opacity="0.00"/></radialGradient></defs><path d="M0,0h108v108h-108z" fill="url(#wathaiq_sky)"/><path d="M0,0h108v108h-108z" fill="url(#wathaiq_dawn)"/><g transform="translate(54 54) scale(0.98) translate(-54 -54)"><path fill="#FDF3D8" d="M36,28 h36 a8,8 0 0 1 8,8 v36 a8,8 0 0 1 -8,8 h-36 a8,8 0 0 1 -8,-8 v-36 a8,8 0 0 1 8,-8 z"/><path fill="#D8BC8C" d="M61.9,28 h4.2 v52 h-4.2 z"/><path stroke="#46311C" stroke-width="3.2" stroke-linecap="round" fill="none" d="M36,42 h18 M36,52 h18 M36,62 h11"/><path fill="#46311C" d="M64,54 m-4.4,0 a4.4,4.4 0 1,0 8.8,0 a4.4,4.4 0 1,0 -8.8,0"/></g><path fill="#FFFFFF" fill-opacity="0.48" d="M20,16 a1.1,1.1 0 1 0 2.2,0 a1.1,1.1 0 1 0 -2.2,0"/><path fill="#FFFFFF" fill-opacity="0.41" d="M87,26 a0.9,0.9 0 1 0 1.8,0 a0.9,0.9 0 1 0 -1.8,0"/></g><g id="i-jisr"><defs><linearGradient id="jisr_sky" x1="20" y1="0" x2="88" y2="108" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#8FA0BC"/><stop offset="0.5" stop-color="#5C7185"/><stop offset="1.0" stop-color="#36455A"/></linearGradient><radialGradient id="jisr_dawn" cx="30" cy="20" r="115" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#ECF0F6" stop-opacity="0.30"/><stop offset="0.45" stop-color="#ECF0F6" stop-opacity="0.14"/><stop offset="0.85" stop-color="#ECF0F6" stop-opacity="0.05"/><stop offset="1.0" stop-color="#ECF0F6" stop-opacity="0"/></radialGradient></defs><path d="M0,0h108v108h-108z" fill="url(#jisr_sky)"/><path d="M0,0h108v108h-108z" fill="url(#jisr_dawn)"/><g transform="translate(54 54) scale(0.98) translate(-54 -54)"><path fill="#FDF3D8" d="M27,40 L81,40 L81,47 L27,47 Z"/><path fill="#FDF3D8" fill-rule="evenodd" d="M31,47 L77,47 L77,74 L31,74 Z M38,74 L38,60 A16,12 0 0 1 70,60 L70,74 Z"/><path fill="none" stroke="#FFFDF2" stroke-opacity="0.68" stroke-width="1.2" d="M28,41 L80,41"/></g><path fill="#FFFFFF" fill-opacity="0.48" d="M20,16 a1.1,1.1 0 1 0 2.2,0 a1.1,1.1 0 1 0 -2.2,0"/><path fill="#FFFFFF" fill-opacity="0.41" d="M87,26 a0.9,0.9 0 1 0 1.8,0 a0.9,0.9 0 1 0 -1.8,0"/></g><g id="i-daftar"><defs><linearGradient id="daftar_sky" x1="20" y1="0" x2="88" y2="108" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#45B4BC"/><stop offset="0.5" stop-color="#2F8F98"/><stop offset="1" stop-color="#1C5D66"/></linearGradient><radialGradient id="daftar_dawn" cx="30" cy="20" r="115" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#D6F2F4" stop-opacity="0.30"/><stop offset="0.45" stop-color="#D6F2F4" stop-opacity="0.14"/><stop offset="0.85" stop-color="#D6F2F4" stop-opacity="0.05"/><stop offset="1.0" stop-color="#D6F2F4" stop-opacity="0"/></radialGradient></defs><path d="M0,0h108v108h-108z" fill="url(#daftar_sky)"/><path d="M0,0h108v108h-108z" fill="url(#daftar_dawn)"/><g transform="translate(54 54) scale(0.98) translate(-54 -54)"><path d="M38,28h30a8,8 0 0 1 8,8v38a8,8 0 0 1 -8,8H38a8,8 0 0 1 -8,-8V36a8,8 0 0 1 8,-8z" fill="#FDF3D8"/><path d="M40.5,41h25a2.5,2.5 0 0 1 0,5H40.5a2.5,2.5 0 0 1 0,-5z M40.5,52h25a2.5,2.5 0 0 1 0,5H40.5a2.5,2.5 0 0 1 0,-5z M40.5,63h16a2.5,2.5 0 0 1 0,5H40.5a2.5,2.5 0 0 1 0,-5z" fill="#96DADE"/><path d="M60,66.5l8.5,-8.5 4.2,4.2 -8.5,8.5 -5.2,1z" fill="#2E8F94"/><path d="M66.2,60.3l2.4,-2.4 4.2,4.2 -2.4,2.4z" fill="#9FE3E5"/><path d="M40,29 L66,29" fill="none" stroke="#FFFDF2" stroke-opacity="0.68" stroke-width="1.2"/></g><path d="M24,22 m-1.2,0 a1.2,1.2 0 1,1 2.4,0 a1.2,1.2 0 1,1 -2.4,0" fill="#FFFFFF" fill-opacity="0.48"/><path d="M86,82 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0" fill="#FFFFFF" fill-opacity="0.41"/></g><g id="i-sijil"><defs><linearGradient id="sijil_sky" x1="20" y1="0" x2="88" y2="108" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#F5C24A"/><stop offset="0.5" stop-color="#E5A21E"/><stop offset="1.0" stop-color="#A6650F"/></linearGradient><radialGradient id="sijil_dawn" cx="30" cy="20" r="115" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#FDEFCE" stop-opacity="0.34"/><stop offset="0.45" stop-color="#FDEFCE" stop-opacity="0.15"/><stop offset="0.85" stop-color="#FDEFCE" stop-opacity="0.05"/><stop offset="1.0" stop-color="#FDEFCE" stop-opacity="0"/></radialGradient></defs><path d="M0,0h108v108h-108z" fill="url(#sijil_sky)"/><path d="M0,0h108v108h-108z" fill="url(#sijil_dawn)"/><g transform="translate(54 54) scale(0.98) translate(-54 -54)"><path fill="#FDF3D8" d="M54,20 c-9,0 -14,7.2 -14,17 c0,12.5 -2.8,16.5 -5.6,20.3 c-1.5,2 -0.1,4.7 2.4,4.7 h34.4 c2.5,0 3.9,-2.7 2.4,-4.7 c-2.8,-3.8 -5.6,-7.8 -5.6,-20.3 C68,27.2 63,20 54,20 z"/><path fill="#FDF3D8" d="M47.5,66 h13 a6.5,6.5 0 0 1 -13,0 z"/><path fill="#FDF3D8" d="M40,76 h28 a3,3 0 0 1 0,6 h-28 a3,3 0 0 1 0,-6 z"/><path fill="#FDF3D8" d="M45,86 h18 a3,3 0 0 1 0,6 h-18 a3,3 0 0 1 0,-6 z"/></g><path fill="#FFFFFF" fill-opacity="0.48" d="M20,16 a1.1,1.1 0 1 0 2.2,0 a1.1,1.1 0 1 0 -2.2,0"/><path fill="#FFFFFF" fill-opacity="0.41" d="M87,26 a0.9,0.9 0 1 0 1.8,0 a0.9,0.9 0 1 0 -1.8,0"/></g><g id="i-jezdan"><defs><linearGradient id="jezdan_sky" x1="20" y1="0" x2="88" y2="108" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#8FBE85"/><stop offset="0.5" stop-color="#689B62"/><stop offset="1.0" stop-color="#3B6B3E"/></linearGradient><radialGradient id="jezdan_dawn" cx="30" cy="20" r="115" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#E0F0DC" stop-opacity="0.30"/><stop offset="0.45" stop-color="#E0F0DC" stop-opacity="0.14"/><stop offset="0.85" stop-color="#E0F0DC" stop-opacity="0.05"/><stop offset="1.0" stop-color="#E0F0DC" stop-opacity="0.00"/></radialGradient></defs><path d="M0,0h108v108h-108z" fill="url(#jezdan_sky)"/><path d="M0,0h108v108h-108z" fill="url(#jezdan_dawn)"/><g transform="translate(54 54) scale(1.05) translate(-54 -54)"><path d="M41,54 V44 A13,13 0 0 1 67,44 V54 H60 V44 A6,6 0 0 0 48,44 V54 Z" fill="#FDF3D8"/><g transform="translate(54 61) rotate(-8) translate(-54 -61)"><path d="M33,50h42a3,3 0 0 1 3,3v14a3,3 0 0 1 -3,3H33a3,3 0 0 1 -3,-3V53a3,3 0 0 1 3,-3z" fill="#A2CF95"/></g><g transform="translate(54 61) rotate(-3) translate(-54 -61)"><path d="M32,53h44a3,3 0 0 1 3,3v14a3,3 0 0 1 -3,3H32a3,3 0 0 1 -3,-3V56a3,3 0 0 1 3,-3z" fill="#C4E4B9"/></g><g transform="translate(54 61) rotate(3) translate(-54 -61)"><path d="M31,56h46a3,3 0 0 1 3,3v14a3,3 0 0 1 -3,3H31a3,3 0 0 1 -3,-3V59a3,3 0 0 1 3,-3z" fill="#E6F6DF"/><path d="M49.5,66a4.5,4.5 0 1 0 9,0a4.5,4.5 0 1 0 -9,0" fill="#8FCB85"/></g><path d="M43.8,38.1 A11.8,11.8 0 0 1 64.2,38.1" fill="none" stroke="#FFFDF2" stroke-opacity=".68" stroke-width="1.2"/></g><path d="M84.8,24a1.2,1.2 0 1 0 2.4,0a1.2,1.2 0 1 0 -2.4,0" fill="#FFFFFF" fill-opacity="0.48"/><path d="M21,80a1,1 0 1 0 2,0a1,1 0 1 0 -2,0" fill="#FFFFFF" fill-opacity="0.41"/></g><g id="i-diwan"><defs><linearGradient id="diwan_sky" x1="20" y1="0" x2="88" y2="108" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#AC70A2"/><stop offset="0.5" stop-color="#7A4A72"/><stop offset="1.0" stop-color="#452441"/></linearGradient><radialGradient id="diwan_dawn" cx="30" cy="20" r="115" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#F0E2EE" stop-opacity="0.30"/><stop offset="0.45" stop-color="#F0E2EE" stop-opacity="0.14"/><stop offset="0.85" stop-color="#F0E2EE" stop-opacity="0.05"/><stop offset="1.0" stop-color="#F0E2EE" stop-opacity="0"/></radialGradient></defs><path d="M0,0h108v108h-108z" fill="url(#diwan_sky)"/><path d="M0,0h108v108h-108z" fill="url(#diwan_dawn)"/><g transform="translate(54 54) scale(0.98) translate(-54 -54)"><path fill="#FDF3D8" fill-rule="evenodd" d="M36.88,38.4 h34.32 a6.24,6.24 0 0 1 6.24,6.24 v21.84 a6.24,6.24 0 0 1 -6.24,6.24 h-34.32 a6.24,6.24 0 0 1 -6.24,-6.24 v-21.84 a6.24,6.24 0 0 1 6.24,-6.24 Z M54.82,43.47 h2.73 a3.12,3.12 0 0 1 3.12,3.12 v17.94 a3.12,3.12 0 0 1 -3.12,3.12 h-2.73 a3.12,3.12 0 0 1 -3.12,-3.12 v-17.94 a3.12,3.12 0 0 1 3.12,-3.12 Z M66.91,43.47 h2.73 a3.12,3.12 0 0 1 3.12,3.12 v17.94 a3.12,3.12 0 0 1 -3.12,3.12 h-2.73 a3.12,3.12 0 0 1 -3.12,-3.12 v-17.94 a3.12,3.12 0 0 1 3.12,-3.12 Z"/><path fill="#C79BBD" fill-rule="evenodd" d="M30.64,34.5 L30.64,66.48 L40,66.48 L47.8,50.49 L43.12,34.5 Z M37.5,50.49 a2.11,2.11 0 1 0 4.22,0 a2.11,2.11 0 1 0 -4.22,0 Z"/><path fill="none" stroke="#FFFDF2" stroke-opacity="0.68" stroke-width="1.2" d="M31.8,35.5 L42.4,35.5 M45.4,39.4 L70.9,39.4"/></g><path fill="#FFFFFF" fill-opacity="0.48" d="M20,16 a1.1,1.1 0 1 0 2.2,0 a1.1,1.1 0 1 0 -2.2,0"/><path fill="#FFFFFF" fill-opacity="0.41" d="M87,26 a0.9,0.9 0 1 0 1.8,0 a0.9,0.9 0 1 0 -1.8,0"/></g><g id="i-sitr"><defs><linearGradient id="sitr_sky" x1="20" y1="0" x2="88" y2="108" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#A18AC8"/><stop offset="0.5" stop-color="#7C64A6"/><stop offset="1" stop-color="#4E3D72"/></linearGradient><radialGradient id="sitr_dawn" cx="30" cy="20" r="115" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#E6DEF4" stop-opacity="0.30"/><stop offset="0.45" stop-color="#E6DEF4" stop-opacity="0.14"/><stop offset="0.85" stop-color="#E6DEF4" stop-opacity="0.05"/><stop offset="1.0" stop-color="#E6DEF4" stop-opacity="0"/></radialGradient><clipPath id="sitr_clip"><path d="M29,39a8,8 0 0 1 8,-8h34a8,8 0 0 1 8,8v30a8,8 0 0 1 -8,8H37a8,8 0 0 1 -8,-8Z"/></clipPath></defs><path d="M0,0h108v108h-108z" fill="url(#sitr_sky)"/><path d="M0,0h108v108h-108z" fill="url(#sitr_dawn)"/><g transform="translate(54 54) scale(0.98) translate(-54 -54)"><path fill="#FDF3D8" fill-rule="evenodd" d="M29,39a8,8 0 0 1 8,-8h34a8,8 0 0 1 8,8v30a8,8 0 0 1 -8,8H37a8,8 0 0 1 -8,-8Z M61.4,43a4.6,4.6 0 1 0 9.2,0a4.6,4.6 0 1 0 -9.2,0Z M34,70L46,55L53,62L62,51L74,70Z"/><g clip-path="url(#sitr_clip)"><path fill="#C9BCE4" fill-opacity="0.92" d="M29,31L54,31L37,77Q29,74 29,69Z"/><path fill="#B5A3D6" fill-opacity="0.92" d="M44,31L58,31L43,77L37,77Z"/></g><path fill="none" stroke="#FFFDF2" stroke-opacity=".68" stroke-width="1.2" d="M59,32 L69,32"/></g><path fill="#FFFFFF" fill-opacity="0.48" d="M22.8,22a1.2,1.2 0 1 0 2.4,0a1.2,1.2 0 1 0 -2.4,0Z"/><path fill="#FFFFFF" fill-opacity="0.38" d="M85,84a1,1 0 1 0 2,0a1,1 0 1 0 -2,0Z"/></g><g id="i-qamariya"><defs><linearGradient id="qamariya_sky" x1="20" y1="0" x2="88" y2="108" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#CE7F92"/><stop offset="0.5" stop-color="#A8506A"/><stop offset="1" stop-color="#6B3247"/></linearGradient><radialGradient id="qamariya_dawn" cx="30" cy="20" r="115" gradientUnits="userSpaceOnUse"><stop offset="0.0" stop-color="#F6DEE5" stop-opacity="0.30"/><stop offset="0.45" stop-color="#F6DEE5" stop-opacity="0.14"/><stop offset="0.85" stop-color="#F6DEE5" stop-opacity="0.05"/><stop offset="1.0" stop-color="#F6DEE5" stop-opacity="0.00"/></radialGradient></defs><path d="M0,0h108v108h-108z" fill="url(#qamariya_sky)"/><path d="M0,0h108v108h-108z" fill="url(#qamariya_dawn)"/><path fill="#FFFFFF" fill-opacity="0.51" d="M22,26 m-1.3,0 a1.3,1.3 0 1,1 2.6,0 a1.3,1.3 0 1,1 -2.6,0"/><path fill="#FFFFFF" fill-opacity="0.42" d="M90,84 m-1,0 a1,1 0 1,1 2,0 a1,1 0 1,1 -2,0"/><g transform="translate(54 54) scale(0.98) translate(-54 -54)"><g transform="translate(24 24) scale(2.5)"><path fill="#FDF3D8" d="M12,3c-4.97,0 -9,4.03 -9,9s4.03,9 9,9 9,-4.03 9,-9c0,-0.46 -0.04,-0.92 -0.1,-1.36 -0.98,1.37 -2.58,2.26 -4.4,2.26 -2.98,0 -5.4,-2.42 -5.4,-5.4 0,-1.81 0.89,-3.42 2.26,-4.4C12.92,3.04 12.46,3 12,3L12,3z"/></g><path fill="#F3CBD5" d="M74,34 m-4,0 a4,4 0 1,1 8,0 a4,4 0 1,1 -8,0"/><path fill="#FBE9EE" d="M73.2,33.2 m-1.6,0 a1.6,1.6 0 1,1 3.2,0 a1.6,1.6 0 1,1 -3.2,0"/><path fill="none" stroke="#FFFDF2" stroke-opacity="0.68" stroke-width="1.2" d="M50.3,33 A21.3,21.3 0 0 0 33,50.3"/></g></g></defs></svg>
+
+<nav>
+  <div class="nav-in">
+    <a class="brand" href="#top"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-store"/></svg> أمان لابز</a>
+    <div class="navlinks">
+      <a href="#apps">التطبيقات</a><a href="#principles">مبادئنا</a>
+      <a href="#pc">للحاسوب</a><a href="#trust">الثقة</a>
+    </div>
+    <a class="nav-cta" data-store-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/amanstore-1.24.16.apk">نزّل المتجر</a>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="stars" aria-hidden="true"></div>
+  <div class="orb" style="top:6%;inset-inline-start:12%;width:74px;animation-delay:0.0s"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-mihrab"/></svg></div><div class="orb" style="top:16%;inset-inline-start:72%;width:62px;animation-delay:1.1s"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-album"/></svg></div><div class="orb" style="top:30%;inset-inline-start:6%;width:56px;animation-delay:2.2s"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-kalamboard"/></svg></div><div class="orb" style="top:8%;inset-inline-start:44%;width:66px;animation-delay:0.6s"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-ruznama"/></svg></div><div class="orb" style="top:34%;inset-inline-start:86%;width:58px;animation-delay:1.7s"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-hisn"/></svg></div><div class="orb" style="top:46%;inset-inline-start:16%;width:62px;animation-delay:2.8s"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-jisr"/></svg></div><div class="orb" style="top:52%;inset-inline-start:74%;width:68px;animation-delay:0.9s"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-qamariya"/></svg></div><div class="orb" style="top:66%;inset-inline-start:8%;width:54px;animation-delay:1.4s"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-daftar"/></svg></div><div class="orb" style="top:70%;inset-inline-start:84%;width:56px;animation-delay:2.0s"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-sijil"/></svg></div><div class="orb" style="top:80%;inset-inline-start:20%;width:64px;animation-delay:0.3s"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-wathaiq"/></svg></div><div class="orb" style="top:86%;inset-inline-start:66%;width:52px;animation-delay:2.5s"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-jezdan"/></svg></div><div class="orb" style="top:58%;inset-inline-start:48%;width:46px;animation-delay:1.9s"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-sitr"/></svg></div>
+  <div class="hero-in">
+    <p class="kicker">عائلة أمان · Aman Labs</p>
+    <h1>تطبيقاتٌ عربيةٌ تعمل لك،<br>لا عليك.</h1>
+    <p class="sub">أربعة عشر تطبيقًا وُلدت في بيتٍ واحد: <b>بلا إعلانات، بلا تتبّع، بلا سحابة</b>. بياناتك تبقى على جهازك وحده — والكثير منها لا يملك إذن الإنترنت أصلًا، فلا يستطيع إفشاء سرّك حتى لو أراد.</p>
+    <div class="ctas">
+      <a class="btn btn-gold" data-store-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/amanstore-1.24.16.apk">⬇ نزّل متجر أمان (APK)</a>
+      <a class="btn btn-ghost" href="#apps">استعرض العائلة</a>
+    </div>
+    <div class="chips">
+      <span class="chip"><b>14</b> تطبيقًا</span>
+      <span class="chip"><b>0</b> إعلانات</span>
+      <span class="chip"><b>0</b> متتبّعات</span>
+      <span class="chip"><b>100%</b> عربي أولًا</span>
+    </div>
+  </div>
+</header>
+
+<section id="principles">
+  <div class="wrap">
+    <p class="sec-k">مبادئنا</p>
+    <h2>الخصوصية عندنا عقيدة، لا إعداد</h2>
+    <p class="lead">لا نطلب منك أن تثق بوعودنا — نبني التطبيق بحيث لا يحتاج ثقتك أصلًا.</p>
+    <div class="prin">
+      <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l22 22M9 9a7 7 0 0 1 10 6M5 12a11 11 0 0 1 2.6-3.4M12 20h.01M8.5 16.5a5 5 0 0 1 5.5-1"/></svg></div>
+        <h3>بلا إنترنت حيث يجب</h3><p>الوثائق والتقويم والإشعارات والسِتر: حزمها لا تحمل إذن الإنترنت أصلًا — العجز عن الإفشاء خيرٌ من الوعد بعدمه.</p></div>
+      <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3 8-10V5l-8-3-8 3v7c0 7 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>توقيع يُفحص قبل التثبيت</h3><p>متجر أمان يطابق بصمة توقيع كل حزمة مع بصمتها المثبّتة لديه — حزمة مزوّرة لا تمرّ.</p></div>
+      <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="9" height="14" rx="2"/><rect x="13" y="4" width="9" height="14" rx="2"/><path d="M6.5 17h.01M17.5 15h.01"/></svg></div>
+        <h3>ينتشر جهازًا لجهاز</h3><p>المتجر وتطبيقاته تُشارَك بالقرب دون إنترنت — يكفي أن يملكه صديقك ليصلك كل شيء.</p></div>
+      <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div>
+        <h3>عربيٌّ أولًا</h3><p>من اليمين إلى اليسار تصميمًا لا ترجمةً — بخط المراعي وذوقٍ واحد يجمع العائلة كلها.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="apps" style="padding-top:20px">
+  <div class="wrap">
+    <p class="sec-k">العائلة</p>
+    <h2>أربعة عشر فردًا، بيتٌ واحد</h2>
+    <p class="lead">كل تطبيقٍ يسدّ حاجةً يومية حقيقية — ويشارك إخوته العقيدة نفسها: بياناتك ملكك وحدك.</p>
+
+    <div class="store-card reveal" data-pkg="org.amanlabs.store">
+      <svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-store"/></svg>
+      <div>
+        <h3>متجر أمان <span class="en">· Aman Store</span></h3>
+        <p class="d">المنصة الرسمية لتثبيت تطبيقات عائلة أمان وتحديثها. يفحص كل حزمة قبل تثبيتها، ويعمل من جهاز إلى جهاز دون حساب ولا تتبّع.</p>
+      </div>
+      <div class="store-cta">
+        <a class="btn btn-gold" data-store-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/amanstore-1.24.16.apk">⬇ تنزيل المتجر</a>
+        <span class="meta">الإصدار <b data-v>1.24.16</b> · <span data-s>1.8 MB</span> · أندرويد 7+</span>
+      </div>
+    </div>
+
+    <div class="grid">
+      <article class="card reveal" style="--ac:#E0A32E" data-pkg="org.amanlabs.kalamboard">
+        <div class="card-head"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-kalamboard"/></svg>
+          <div><h3>كلام بورد</h3><p class="tag">كيبورد آمن وخاص</p></div>
+        </div>
+        <p class="sum">اكتب بحرية — ولا حرف يغادر جهازك</p>
+        <div class="feats"><span>تنبؤ حتى خمس كلمات متتالية</span><span>يتعلّم مفرداتك وعباراتك المتكررة</span><span>تصحيح متسامح مع أخطاء الطبع</span></div>
+        <div class="card-foot">
+          <span class="meta"><b data-v>1.3.7</b> · <span data-s>11.6 MB</span></span>
+          <a class="dl" data-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/KalamBoard-1.3.7.apk" rel="nofollow">تنزيل APK</a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#7C89CF" data-pkg="org.amanlabs.mihrab">
+        <div class="card-head"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-mihrab"/></svg>
+          <div><h3>محراب</h3><p class="tag">مواقيت الصلاة والأذان</p></div>
+        </div>
+        <p class="sum">أذانٌ في وقته أينما كنت، بلا إنترنت</p>
+        <div class="feats"><span>حساب محلي دقيق بلا إنترنت</span><span>أذان وتنبيهات لكل صلاة</span><span>ودجت للشاشة الرئيسية</span></div>
+        <div class="card-foot">
+          <span class="meta"><b data-v>1.0.25</b> · <span data-s>6.5 MB</span></span>
+          <a class="dl" data-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/mihrab-1.0.25.apk" rel="nofollow">تنزيل APK</a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#2A6FB0" data-pkg="org.amanlabs.album">
+        <div class="card-head"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-album"/></svg>
+          <div><h3>ألبوم</h3><p class="tag">معرض الصور والفيديو</p></div>
+        </div>
+        <p class="sum">جِد أي صورة بلمحة، وخبّئ ما يخصك</p>
+        <div class="feats"><span>فرز الوجوه على الجهاز بلا رفع للسحابة</span><span>مشغّل فيديو كامل</span><span>محرّر صور</span></div>
+        <div class="card-foot">
+          <span class="meta"><b data-v>0.2.5</b> · <span data-s>91.7 MB</span></span>
+          <a class="dl" data-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/album-0.2.5.apk" rel="nofollow">تنزيل APK</a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#235C34" data-pkg="org.amanlabs.ruznama">
+        <div class="card-head"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-ruznama"/></svg>
+          <div><h3>رزنامة</h3><p class="tag">تقويم المواعيد والدعوات</p></div>
+        </div>
+        <p class="sum">مواعيدك ودعواتك محفوظة — بلا إنترنت ولا حساب</p>
+        <div class="feats"><span>يفتح دعوات الاجتماعات من بريدك ويحفظها بنقرة</span><span>ردٌّ على الدعوة: قبول أو تردد أو اعتذار</span><span>مواعيد ومهام وتذكيرات في وقتها</span></div>
+        <div class="card-foot">
+          <span class="meta"><b data-v>0.1.2</b> · <span data-s>2.3 MB</span></span>
+          <a class="dl" data-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/ruznama-0.1.2.apk" rel="nofollow">تنزيل APK</a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#C4764E" data-pkg="org.amanlabs.hisn">
+        <div class="card-head"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-hisn"/></svg>
+          <div><h3>حصن</h3><p class="tag">مدير كلمات المرور</p></div>
+        </div>
+        <p class="sum">كلمة واحدة تحفظ كل كلمات مرورك</p>
+        <div class="feats"><span>تعبئة تلقائية في المتصفح والتطبيقات</span><span>رموز مؤقتة (2FA / TOTP)</span><span>مزامنة محلية مع حاسوبك (ويندوز/لينكس)</span></div>
+        <div class="card-foot">
+          <span class="meta"><b data-v>0.2.6</b> · <span data-s>15.1 MB</span></span>
+          <a class="dl" data-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/hisn-0.2.6.apk" rel="nofollow">تنزيل APK</a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#A98A5C" data-pkg="org.amanlabs.wathaiq">
+        <div class="card-head"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-wathaiq"/></svg>
+          <div><h3>وَثائق</h3><p class="tag">خزنة الأوراق الرسمية</p></div>
+        </div>
+        <p class="sum">أوراقك الرسمية مشفّرة، وتذكيرٌ قبل انتهائها</p>
+        <div class="feats"><span>تشفير كامل على الجهاز</span><span>مسح بالكاميرا وقصّ الصفحات</span><span>تذكير قبل انتهاء الصلاحية</span></div>
+        <div class="card-foot">
+          <span class="meta"><b data-v>0.1.1</b> · <span data-s>4.1 MB</span></span>
+          <a class="dl" data-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/wathaiq-0.1.1.apk" rel="nofollow">تنزيل APK</a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#5C7185" data-pkg="org.amanlabs.jisr">
+        <div class="card-head"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-jisr"/></svg>
+          <div><h3>جسر</h3><p class="tag">نقل الملفات بين الأجهزة</p></div>
+        </div>
+        <p class="sum">شارك ملفاتك الضخمة في ثوانٍ، بلا إنترنت</p>
+        <div class="feats"><span>نقل عبر الشبكة المحلية بلا إنترنت</span><span>بلا خادم ولا سحابة ولا حساب</span><span>رمز اقتران مباشر حين يتعذّر الاكتشاف</span></div>
+        <div class="card-foot">
+          <span class="meta"><b data-v>0.2.8</b> · <span data-s>136 MB</span></span>
+          <a class="dl" data-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/jisr-0.2.8.apk" rel="nofollow">تنزيل APK</a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#3FC0C4" data-pkg="org.amanlabs.daftar">
+        <div class="card-head"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-daftar"/></svg>
+          <div><h3>دفتر</h3><p class="tag">مفكرة ملاحظات خاصة</p></div>
+        </div>
+        <p class="sum">دوّن قبل أن تطير الفكرة — وذكّر نفسك</p>
+        <div class="feats"><span>تدوين سريع</span><span>دفاتر منظّمة</span><span>نسخ احتياطي آمن</span></div>
+        <div class="card-foot">
+          <span class="meta"><b data-v>1.4.9</b> · <span data-s>4.4 MB</span></span>
+          <a class="dl" data-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/daftar-1.4.9.apk" rel="nofollow">تنزيل APK</a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#E5A21E" data-pkg="org.amanlabs.sijil">
+        <div class="card-head"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-sijil"/></svg>
+          <div><h3>سِجِلّ</h3><p class="tag">أرشيف الإشعارات</p></div>
+        </div>
+        <p class="sum">كل إشعارٍ مسحته بالخطأ… تجده هنا</p>
+        <div class="feats"><span>يلتقط الإشعارات فور وصولها والهاتف مقفل</span><span>ابحث في كل ما مضى منها</span><span>إحصاءٌ لأكثر التطبيقات إزعاجاً</span></div>
+        <div class="card-foot">
+          <span class="meta"><b data-v>0.1.2</b> · <span data-s>2.2 MB</span></span>
+          <a class="dl" data-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/sijil-0.1.2.apk" rel="nofollow">تنزيل APK</a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#97C98B" data-pkg="org.amanlabs.jezdan">
+        <div class="card-head"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-jezdan"/></svg>
+          <div><h3>جزدان</h3><p class="tag">دفتر مصاريفك اليومية</p></div>
+        </div>
+        <p class="sum">اعرف أين تذهب نقودك — بأي عملة</p>
+        <div class="feats"><span>محافظ بعملات متعددة</span><span>تتبّع الديون والمستحقات</span><span>تقارير ورسوم بيانية</span></div>
+        <div class="card-foot">
+          <span class="meta"><b data-v>0.2.11-alpha</b> · <span data-s>2.8 MB</span></span>
+          <a class="dl" data-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/jezdan-0.2.11-alpha.apk" rel="nofollow">تنزيل APK</a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#7A4A72" data-pkg="org.amanlabs.diwan">
+        <div class="card-head"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-diwan"/></svg>
+          <div><h3>ديوان</h3><p class="tag">مدير الملفات</p></div>
+        </div>
+        <p class="sum">افرز فوضى الملفات وجِد أي شيء بسرعة</p>
+        <div class="feats"><span>لوحان جنبًا إلى جنب</span><span>خزنة مشفّرة AES-256</span><span>خريطة مساحة القرص</span></div>
+        <div class="card-foot">
+          <span class="meta"><b data-v>0.2.1</b> · <span data-s>2.3 MB</span></span>
+          <a class="dl" data-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/diwan-0.2.1.apk" rel="nofollow">تنزيل APK</a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#9D85C4" data-pkg="org.amanlabs.sitr">
+        <div class="card-head"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-sitr"/></svg>
+          <div><h3>سِتر</h3><p class="tag">قفل وإخفاء الصور</p></div>
+        </div>
+        <p class="sum">ما تخفيه لا يراه سواك، ولو أمسكوا هاتفك</p>
+        <div class="feats"><span>تشفير مستقل لكل صورة</span><span>بلا أي أذونات نظام</span><span>إخفاء تام عن المعرض</span></div>
+        <div class="card-foot">
+          <span class="meta"><b data-v>0.3.5</b> · <span data-s>3.4 MB</span></span>
+          <a class="dl" data-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/sitr-0.3.5.apk" rel="nofollow">تنزيل APK</a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#D97C93" data-pkg="org.amanlabs.qamariya">
+        <div class="card-head"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-qamariya"/></svg>
+          <div><h3>قمرية</h3><p class="tag">حاسبة الدورة الشهرية</p></div>
+        </div>
+        <p class="sum">اعرفي أيامكِ القادمة — وسرّكِ يبقى عندكِ</p>
+        <div class="feats"><span>تقويم وتوقعات للدورة</span><span>تذكيرات</span><span>تشفير كامل للبيانات</span></div>
+        <div class="card-foot">
+          <span class="meta"><b data-v>1.3.11</b> · <span data-s>24.1 MB</span></span>
+          <a class="dl" data-dl href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/qamariya-1.3.11.apk" rel="nofollow">تنزيل APK</a>
+        </div>
+      </article></div>
+  </div>
+</section>
+
+<section id="pc" style="padding-top:10px">
+  <div class="wrap">
+    <p class="sec-k">للحاسوب</p>
+    <h2>جسرٌ يصل هاتفك بحاسوبك</h2>
+    <div class="pc reveal">
+      <svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-jisr"/></svg>
+      <div>
+        <h3>جسر لويندوز</h3>
+        <p>انقل الملفات بين هاتفك وحاسوبك عبر شبكتك المحلية وحدها — بلا كابل ولا سحابة ولا حدود حجم.</p>
+      </div>
+      <div class="pc-btns">
+        <a class="btn btn-gold" href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/jisr-0.2.9-windows-x64-setup.exe">⬇ المثبّت (Setup)</a>
+        <a class="btn btn-ghost" href="https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/jisr-0.2.9-windows-x64-portable.zip">نسخة محمولة (ZIP)</a>
+        <span class="pc-note">ويندوز 10/11 · 64bit</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="padding-top:10px">
+  <div class="wrap">
+    <p class="sec-k">كيف يصلك أمان؟</p>
+    <h2>ثلاث خطوات، ثم لا حاجة للإنترنت</h2>
+    <div class="steps">
+      <div class="step reveal"><h3>نزّل متجر أمان</h3><p>ملف APK واحد من هذه الصفحة — ثبّته واسمح بمصادر التثبيت حين يسألك أندرويد.</p></div>
+      <div class="step reveal"><h3>ثبّت ما تحب</h3><p>تصفح العائلة داخل المتجر وثبّت بنقرة — المتجر يفحص توقيع كل حزمة قبل تثبيتها.</p></div>
+      <div class="step reveal"><h3>شاركه من جهازٍ لجهاز</h3><p>مرّر المتجر وتطبيقاته لأهلك وأصدقائك بالمشاركة القريبة أو عبر جسر — بلا إنترنت إطلاقًا.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="trust" class="trust">
+  <div class="wrap trust-in">
+    <div>
+      <p class="sec-k">الثقة تُبنى بالهندسة</p>
+      <h2>شفافيةٌ يمكنك التحقق منها بنفسك</h2>
+      <div class="t-list">
+        <div class="t-item reveal"><div class="ic">🔏</div><div><b>بصمات توقيع معلنة ومثبّتة</b><p>بصمة SHA-256 لتوقيع كل تطبيق منشورة في كاتالوغ عام، والمتجر يرفض أي حزمة تخالفها.</p></div></div>
+        <div class="t-item reveal"><div class="ic">🧾</div><div><b>بصمة لكل ملف</b><p>لكل حزمة sha256 معلنة — تستطيع التحقق من أي ملف نزّلته بنفسك قبل تثبيته.</p></div></div>
+        <div class="t-item reveal"><div class="ic">🛡</div><div><b>حارس بناءٍ صارم</b><p>التطبيقات الحساسة تُبنى بحارسٍ يفشل البناء كله إن تسلّلت أي مكتبة شبكية أو إذنٌ غير مبرَّر.</p></div></div>
+        <div class="t-item reveal"><div class="ic">🗝</div><div><b>بياناتك تغادر معك فقط</b><p>نسخ احتياطي موحّد مشفّر بمفتاحٍ تحفظه أنت — لا حسابات ولا خوادم ولا «مزامنة» خفية.</p></div></div>
+      </div>
+      <div class="t-links">
+        <a href="https://github.com/aman-apk/aman-releases/blob/main/catalog.json" rel="noopener">كاتالوغ الشفافية</a>
+        <a href="https://github.com/aman-apk/aman-releases/releases/tag/v1.1.0" rel="noopener">كل الإصدارات على GitHub</a>
+      </div>
+    </div>
+    <div class="t-visual" aria-hidden="true">
+      <svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-mihrab"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-kalamboard"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-album"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-ruznama"/></svg>
+      <svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-hisn"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-wathaiq"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-jisr"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-daftar"/></svg>
+      <svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-sijil"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-jezdan"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-diwan"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-sitr"/></svg>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap f-in">
+    <a class="brand" href="#top"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-store"/></svg> أمان لابز</a>
+    <div class="f-links">
+      <a href="https://wa.me/963980690860" rel="noopener">تواصل واتساب</a>
+      <a href="https://github.com/aman-apk" rel="noopener">GitHub</a>
+    </div>
+    <p class="f-note">هذا عنوانٌ مؤقت ريثما يستقر الدومين الدائم.<br>صُنع بحبٍّ في بيت أمان · أمان © 2026</p>
+  </div>
+</footer>
+
+<script>
+  // نجوم البطل
+  (function () {
+    var host = document.querySelector('.stars');
+    for (var i = 0; i < 70; i++) {
+      var s = document.createElement('span');
+      s.className = 'star';
+      s.style.top = (Math.random() * 100) + '%';
+      s.style.insetInlineStart = (Math.random() * 100) + '%';
+      s.style.animationDelay = (Math.random() * 4).toFixed(2) + 's';
+      s.style.animationDuration = (3 + Math.random() * 4).toFixed(2) + 's';
+      var d = Math.random();
+      s.style.width = s.style.height = (d < .8 ? 2 : 3) + 'px';
+      host.appendChild(s);
+    }
+  })();
+
+  // كشف تدريجي
+  (function () {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  })();
+
+  // الكاتالوغ الحي: النسخ والأحجام والروابط تُحدَّث من المصدر نفسه الذي يقرؤه المتجر
+  (function () {
+    var FB = {"org.amanlabs.store": {"v": "1.24.16", "s": 1913373, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/amanstore-1.24.16.apk"}, "org.amanlabs.kalamboard": {"v": "1.3.7", "s": 12161482, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/KalamBoard-1.3.7.apk"}, "org.amanlabs.mihrab": {"v": "1.0.25", "s": 6837173, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/mihrab-1.0.25.apk"}, "org.amanlabs.album": {"v": "0.2.5", "s": 96110309, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/album-0.2.5.apk"}, "org.amanlabs.ruznama": {"v": "0.1.2", "s": 2377354, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/ruznama-0.1.2.apk"}, "org.amanlabs.hisn": {"v": "0.2.6", "s": 15826366, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/hisn-0.2.6.apk"}, "org.amanlabs.wathaiq": {"v": "0.1.1", "s": 4343390, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/wathaiq-0.1.1.apk"}, "org.amanlabs.jisr": {"v": "0.2.8", "s": 142894203, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/jisr-0.2.8.apk"}, "org.amanlabs.daftar": {"v": "1.4.9", "s": 4575670, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/daftar-1.4.9.apk"}, "org.amanlabs.sijil": {"v": "0.1.2", "s": 2286515, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/sijil-0.1.2.apk"}, "org.amanlabs.jezdan": {"v": "0.2.11-alpha", "s": 2947703, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/jezdan-0.2.11-alpha.apk"}, "org.amanlabs.diwan": {"v": "0.2.1", "s": 2440471, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/diwan-0.2.1.apk"}, "org.amanlabs.sitr": {"v": "0.3.5", "s": 3558083, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/sitr-0.3.5.apk"}, "org.amanlabs.qamariya": {"v": "1.3.11", "s": 25291105, "u": "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/qamariya-1.3.11.apk"}};
+    function mb(n) { return (n / 1048576).toFixed(1) + ' MB'; }
+    function apply(map) {
+      document.querySelectorAll('[data-pkg]').forEach(function (card) {
+        var a = map[card.getAttribute('data-pkg')]; if (!a) return;
+        var v = card.querySelector('[data-v]'); if (v) v.textContent = a.v;
+        var s = card.querySelector('[data-s]'); if (s) s.textContent = mb(a.s);
+        var d = card.querySelector('[data-dl]'); if (d) d.href = a.u;
+      });
+      var st = map['org.amanlabs.store'];
+      if (st) document.querySelectorAll('[data-store-dl]').forEach(function (b) { b.href = st.u; });
+    }
+    apply(FB);
+    fetch('https://raw.githubusercontent.com/aman-apk/aman-releases/main/catalog.json', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (c) {
+        var m = {};
+        c.apps.forEach(function (a) { m[a.packageName] = { v: a.versionName, s: a.sizeBytes, u: a.apkUrl }; });
+        apply(m);
+      })
+      .catch(function () {});
+  })();
+</script>
+</body>
+</html>
