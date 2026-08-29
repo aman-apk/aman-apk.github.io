@@ -85,9 +85,9 @@ HTML = f'''<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>مختبرات أمان — عائلة تطبيقات الخصوصية العربية</title>
-<meta name="description" content="أربعة عشر تطبيقًا عربيًا تعمل بلا إنترنت وبلا إعلانات وبلا تتبّع — بياناتك على جهازك وحده. نزّل متجر أمان وثبّت العائلة كلها.">
+<meta name="description" content="أربعة عشر تطبيقاً عربياً تعمل بلا إنترنت وبلا إعلانات وبلا تتبّع — بياناتك على جهازك وحده. نزّل متجر أمان وثبّت العائلة كلها.">
 <meta property="og:title" content="مختبرات أمان — عائلة تطبيقات الخصوصية العربية">
-<meta property="og:description" content="١٤ تطبيقًا عربيًا: بلا إعلانات، بلا تتبّع، بلا سحابة — وأكثرها يعمل دون اتصالٍ بالإنترنت.">
+<meta property="og:description" content="١٤ تطبيقاً عربياً: بلا إعلانات، بلا تتبّع، بلا سحابة — وأكثرها يعمل دون اتصالٍ بالإنترنت.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://amanlabs.app/">
 <link rel="canonical" href="https://amanlabs.app/">
@@ -311,16 +311,16 @@ HTML = f'''<!doctype html>
   <div class="hero-in">
     <p class="kicker">عائلة أمان · Aman Labs</p>
     <h1>تطبيقاتٌ عربيةٌ تعمل لك،<br>لا عليك.</h1>
-    <p class="sub">أربعة عشر تطبيقًا وُلدت في بيتٍ واحد: <b>بلا إعلانات، بلا تتبّع، بلا سحابة</b>. بياناتك تبقى على جهازك، وأكثر التطبيقات يعمل دون اتصالٍ بالإنترنت أصلًا.</p>
+    <p class="sub">أربعة عشر تطبيقاً وُلدت في بيتٍ واحد: <b>بلا إعلانات، بلا تتبّع، بلا سحابة</b>. بياناتك تبقى على جهازك، وأكثر التطبيقات يعمل دون اتصالٍ بالإنترنت أصلاً.</p>
     <div class="ctas">
       <a class="btn btn-gold" data-store-dl href="{store['apkUrl']}">⬇ نزّل متجر أمان (APK)</a>
       <a class="btn btn-ghost" href="#apps">استعرض العائلة</a>
     </div>
     <div class="chips">
-      <span class="chip"><b>14</b> تطبيقًا</span>
+      <span class="chip"><b>14</b> تطبيقاً</span>
       <span class="chip"><b>0</b> إعلانات</span>
       <span class="chip"><b>0</b> متتبّعات</span>
-      <span class="chip"><b>100%</b> عربي أولًا</span>
+      <span class="chip"><b>100%</b> عربي أولاً</span>
     </div>
     <div class="orbit" aria-hidden="true"><div class="orbit-track">{orbit_tiles}{orbit_tiles}</div></div>
   </div>
@@ -330,16 +330,16 @@ HTML = f'''<!doctype html>
   <div class="wrap">
     <p class="sec-k">مبادئنا</p>
     <h2>الخصوصية عندنا مبدأ، لا إعداد</h2>
-    <p class="lead">لا نطلب منك أن تثق بوعودنا — نبني التطبيق بحيث لا يحتاج ثقتك أصلًا.</p>
+    <p class="lead">لا نطلب منك أن تثق بوعودنا — نبني التطبيق بحيث لا يحتاج ثقتك أصلاً.</p>
     <div class="prin">
       <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l22 22M9 9a7 7 0 0 1 10 6M5 12a11 11 0 0 1 2.6-3.4M12 20h.01M8.5 16.5a5 5 0 0 1 5.5-1"/></svg></div>
-        <h3>بلا إنترنت حيث يجب</h3><p>الوثائق والتقويم والإشعارات والسِتر: حزمها لا تحمل إذن الإنترنت أصلًا — تحقّق بنفسك من إعدادات النظام.</p></div>
+        <h3>بلا إنترنت حيث يجب</h3><p>الوثائق والتقويم والإشعارات والسِتر: حزمها لا تحمل إذن الإنترنت أصلاً — تحقّق بنفسك من إعدادات النظام.</p></div>
       <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3 8-10V5l-8-3-8 3v7c0 7 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3>توقيع يُفحص قبل التثبيت</h3><p>متجر أمان يطابق بصمة توقيع كل حزمة مع بصمتها المثبّتة لديه — حزمة مزوّرة لا تمرّ.</p></div>
       <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="9" height="14" rx="2"/><rect x="13" y="4" width="9" height="14" rx="2"/><path d="M6.5 17h.01M17.5 15h.01"/></svg></div>
-        <h3>ينتشر جهازًا لجهاز</h3><p>المتجر وتطبيقاته تُشارَك بالقرب دون إنترنت — يكفي أن يملكه صديقك ليصلك كل شيء.</p></div>
+        <h3>ينتشر جهازاً لجهاز</h3><p>المتجر وتطبيقاته تُشارَك بالقرب دون إنترنت — يكفي أن يملكه صديقك ليصلك كل شيء.</p></div>
       <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div>
-        <h3>عربيٌّ أولًا</h3><p>من اليمين إلى اليسار تصميمًا لا ترجمةً — بخط المراعي وذوقٍ واحد يجمع العائلة كلها.</p></div>
+        <h3>عربيٌّ أولاً</h3><p>من اليمين إلى اليسار تصميماً لا ترجمةً — بخط المراعي وذوقٍ واحد يجمع العائلة كلها.</p></div>
     </div>
   </div>
 </section>
@@ -347,7 +347,7 @@ HTML = f'''<!doctype html>
 <section id="apps" style="padding-top:20px">
   <div class="wrap">
     <p class="sec-k">العائلة</p>
-    <h2>أربعة عشر فردًا، بيتٌ واحد</h2>
+    <h2>أربعة عشر فرداً، بيتٌ واحد</h2>
     <p class="lead">كل تطبيقٍ يسدّ حاجةً يومية حقيقية — ويشارك إخوته المبدأ نفسه: بياناتك ملكك وحدك.</p>
 
     <div class="store-card reveal" data-pkg="{store['packageName']}">
@@ -392,7 +392,7 @@ HTML = f'''<!doctype html>
     <div class="steps">
       <div class="step reveal"><h3>نزّل متجر أمان</h3><p>ملف APK واحد من هذه الصفحة — ثبّته واسمح بمصادر التثبيت حين يسألك أندرويد.</p></div>
       <div class="step reveal"><h3>ثبّت ما تحب</h3><p>تصفح العائلة داخل المتجر وثبّت بنقرة — المتجر يفحص توقيع كل حزمة قبل تثبيتها.</p></div>
-      <div class="step reveal"><h3>شاركه من جهازٍ لجهاز</h3><p>مرّر المتجر وتطبيقاته لأهلك وأصدقائك بالمشاركة القريبة أو عبر جسر — بلا إنترنت إطلاقًا.</p></div>
+      <div class="step reveal"><h3>شاركه من جهازٍ لجهاز</h3><p>مرّر المتجر وتطبيقاته لأهلك وأصدقائك بالمشاركة القريبة أو عبر جسر — بلا إنترنت إطلاقاً.</p></div>
     </div>
   </div>
 </section>
