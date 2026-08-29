@@ -87,6 +87,8 @@ HTML = f'''<!doctype html>
 <meta property="og:title" content="مختبرات أمان — عائلة تطبيقات الخصوصية العربية">
 <meta property="og:description" content="١٤ تطبيقًا عربيًا: بلا إعلانات، بلا تتبّع، بلا سحابة — وأكثرها يعمل دون اتصالٍ بالإنترنت.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://amanlabs.app/">
+<link rel="canonical" href="https://amanlabs.app/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'%3E%3Crect width='108' height='108' rx='24' fill='%23131826'/%3E%3Ccircle cx='54' cy='54' r='20' fill='%23E0A32E'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -435,7 +437,7 @@ HTML = f'''<!doctype html>
       <a href="https://wa.me/963980690860" rel="noopener">تواصل واتساب</a>
       <a href="https://github.com/aman-apk" rel="noopener">GitHub</a>
     </div>
-    <p class="f-note">هذا عنوانٌ مؤقت ريثما يستقر الدومين الدائم.<br>صُنع بحبٍّ في بيت أمان · {cat['publisher']['nameAr']} © 2026</p>
+    <p class="f-note">amanlabs.app — بيت العائلة على الويب.<br>صُنع بحبٍّ في بيت أمان · {cat['publisher']['nameAr']} © 2026</p>
   </div>
 </footer>
 
@@ -496,3 +498,16 @@ HTML = f'''<!doctype html>
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 io.open(OUT, "w", encoding="utf-8").write(HTML)
 print("site written:", OUT, len(HTML), "chars")
+
+# amanlabs.app/store — رابط ثابت للطباعة ورموز QR: يوجّه دوماً لأحدث APK للمتجر من الكاتالوغ
+store_dir = os.path.join(os.path.dirname(OUT), "store")
+os.makedirs(store_dir, exist_ok=True)
+io.open(os.path.join(store_dir, "index.html"), "w", encoding="utf-8").write(
+    f'''<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<title>تنزيل متجر أمان</title>
+<meta http-equiv="refresh" content="0;url={store['apkUrl']}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{{font-family:sans-serif;background:#0B0E15;color:#F2EDE3;display:grid;place-items:center;min-height:100vh;text-align:center}}a{{color:#E0A32E}}</style>
+</head><body><p>يبدأ تنزيل متجر أمان الآن…<br><a href="{store['apkUrl']}">اضغط هنا إن لم يبدأ تلقائياً</a></p>
+<script>location.replace({json.dumps(store['apkUrl'])});</script></body></html>''')
+print("store redirect written ->", store["apkUrl"])
