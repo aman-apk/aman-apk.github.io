@@ -41,6 +41,8 @@ CONST = [
     ("sijil",     "70%", "84%", 56, 2.0), ("wathaiq", "80%", "20%", 64, 0.3),
     ("jezdan",    "86%", "66%", 52, 2.5), ("sitr",    "58%", "48%", 46, 1.9),
 ]
+orbit_tiles = "".join(tile(slug(a["packageName"])) for a in apps)
+
 const_html = "".join(
     f'<div class="orb" style="top:{top};inset-inline-start:{start};width:{w}px;animation-delay:{d}s">{tile(s)}</div>'
     for s, top, start, w, d in CONST)
@@ -261,11 +263,22 @@ HTML = f'''<!doctype html>
   .reveal {{ opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease; }}
   .reveal.in {{ opacity:1; transform:none; }}
 
+  /* حزام العائلة — بديل الكوكبة على الشاشات الضيقة: صفٌّ ينساب بحواف ذائبة */
+  .orbit {{ display:none; margin-top:38px; overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image:linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }}
+  .orbit-track {{ display:flex; gap:14px; width:max-content; direction:ltr;
+    animation:orbitflow 40s linear infinite; padding:8px 0 14px; }}
+  .orbit .tile {{ width:58px; height:58px; border-radius:14px; flex-shrink:0;
+    box-shadow:0 8px 20px rgba(0,0,0,.45); }}
+  .orbit-track .tile:nth-child(odd) {{ transform:translateY(8px); }}
+  @keyframes orbitflow {{ from {{ transform:translateX(0); }} to {{ transform:translateX(-50%); }} }}
+
   @media (max-width: 900px) {{
     .navlinks {{ display:none; }}
     .trust-in {{ grid-template-columns:1fr; }}
     .orb {{ display:none; }}
-    .orb:nth-child(-n+5) {{ display:block; opacity:.3; }}
+    .orbit {{ display:block; }}
     .store-cta, .pc-btns {{ margin-inline-start:0; width:100%; }}
     .pc-btns {{ flex-direction:row; flex-wrap:wrap; }}
     header {{ min-height:auto; }}
@@ -273,6 +286,7 @@ HTML = f'''<!doctype html>
   }}
   @media (prefers-reduced-motion: reduce) {{
     .star, .orb {{ animation:none; }}
+    .orbit-track {{ animation:none; }}
     .reveal {{ opacity:1; transform:none; transition:none; }}
   }}
 </style>
@@ -308,6 +322,7 @@ HTML = f'''<!doctype html>
       <span class="chip"><b>0</b> متتبّعات</span>
       <span class="chip"><b>100%</b> عربي أولًا</span>
     </div>
+    <div class="orbit" aria-hidden="true"><div class="orbit-track">{orbit_tiles}{orbit_tiles}</div></div>
   </div>
 </header>
 
