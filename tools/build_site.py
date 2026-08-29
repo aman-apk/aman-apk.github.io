@@ -452,7 +452,7 @@ HTML = f'''<!doctype html>
       <a href="https://wa.me/963980690860" rel="noopener">تواصل واتساب</a>
       <a href="https://github.com/aman-apk" rel="noopener">GitHub</a>
     </div>
-    <p class="f-note">amanlabs.app — بيت العائلة على الويب.<br>صُنع بحبٍّ في بيت أمان · {cat['publisher']['nameAr']} © 2026</p>
+    <p class="f-note">© 2026 مختبرات أمان · Aman Labs — جميع الحقوق محفوظة.</p>
   </div>
 </footer>
 
