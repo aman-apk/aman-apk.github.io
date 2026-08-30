@@ -41,7 +41,7 @@ CONST = [
     ("sijil",     "70%", "84%", 56, 2.0), ("wathaiq", "80%", "20%", 64, 0.3),
     ("jezdan",    "86%", "66%", 52, 2.5), ("sitr",    "58%", "48%", 46, 1.9),
 ]
-orbit_tiles = "".join(tile(slug(a["packageName"])) for a in apps)
+orbit_tiles = "".join(tile(slug(a["packageName"])) for a in members)  # بلا بلاطة المتجر بأمر المالك
 
 const_html = "".join(
     f'<div class="orb" style="top:{top};inset-inline-start:{start};width:{w}px;animation-delay:{d}s">{tile(s)}</div>'
