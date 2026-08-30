@@ -264,7 +264,7 @@ HTML = f'''<!doctype html>
   .reveal.in {{ opacity:1; transform:none; }}
 
   /* حزام العائلة — بديل الكوكبة على الشاشات الضيقة: صفٌّ ينساب بحواف ذائبة */
-  .orbit {{ display:none; margin-top:38px; overflow:hidden;
+  .orbit {{ display:none; margin-top:38px; overflow:hidden; direction:ltr;
     -webkit-mask-image:linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
     mask-image:linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }}
   .orbit-track {{ display:flex; gap:14px; width:max-content; direction:ltr;
