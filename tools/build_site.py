@@ -314,7 +314,7 @@ HTML = f'''<!doctype html>
     <p class="sub">أربعة عشر تطبيقاً وُلدت في بيتٍ واحد: <b>بلا إعلانات، بلا تتبّع، بلا سحابة</b>. بياناتك تبقى على جهازك، وأكثر التطبيقات يعمل دون اتصالٍ بالإنترنت أصلاً.</p>
     <div class="ctas">
       <a class="btn btn-gold" data-store-dl href="{store['apkUrl']}">⬇ نزّل متجر أمان (APK)</a>
-      <a class="btn btn-ghost" href="#apps">استعرض العائلة</a>
+      <a class="btn btn-ghost" href="#apps">تعرف على التطبيقات</a>
     </div>
     <div class="chips">
       <span class="chip"><b>14</b> تطبيقاً</span>
