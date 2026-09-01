@@ -76,8 +76,8 @@ WIN_SETUP = "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/
 WIN_ZIP   = "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/jisr-0.2.9-windows-x64-portable.zip"
 
 from urllib.parse import quote
-WA_REQUEST = "https://wa.me/963980690860?text=" + quote("طلب مشروع خاص: ")
-WA_REPORT  = "https://wa.me/963980690860?text=" + quote("بلاغ مشكلة: ")
+WA_REQUEST = "https://wa.me/963943558806?text=" + quote("طلب مشروع خاص: ")
+WA_REPORT  = "https://wa.me/963943558806?text=" + quote("بلاغ مشكلة: ")
 
 HTML = f'''<!doctype html>
 <html lang="ar" dir="rtl">
@@ -449,7 +449,7 @@ HTML = f'''<!doctype html>
   <div class="wrap f-in">
     <a class="brand" href="#top">{tile("store")} مختبرات أمان</a>
     <div class="f-links">
-      <a href="https://wa.me/963980690860" rel="noopener">تواصل واتساب</a>
+      <a href="https://wa.me/963943558806" rel="noopener">تواصل واتساب</a>
       <a href="https://github.com/aman-apk" rel="noopener">GitHub</a>
     </div>
     <p class="f-note">© 2026 مختبرات أمان · Aman Labs — جميع الحقوق محفوظة.</p>
