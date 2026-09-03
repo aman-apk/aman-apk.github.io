@@ -72,8 +72,9 @@ FALLBACK = json.dumps(
     {a["packageName"]: {"v": a["versionName"], "s": a["sizeBytes"], "u": a["apkUrl"]} for a in apps},
     ensure_ascii=False)
 
-WIN_SETUP = "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/jisr-0.2.9-windows-x64-setup.exe"
-WIN_ZIP   = "https://github.com/aman-apk/aman-releases/releases/download/v1.1.0/jisr-0.2.9-windows-x64-portable.zip"
+# عبر مرآة كلاودفلير — الووركر يخدم exe/zip أيضاً منذ 2026-09-03
+WIN_SETUP = "https://dl.amanlabs.app/jisr-0.2.9-windows-x64-setup.exe"
+WIN_ZIP   = "https://dl.amanlabs.app/jisr-0.2.9-windows-x64-portable.zip"
 
 from urllib.parse import quote
 WA_REQUEST = "https://wa.me/963943558806?text=" + quote("طلب مشروع خاص: ")
@@ -496,14 +497,21 @@ HTML = f'''<!doctype html>
       if (st) document.querySelectorAll('[data-store-dl]').forEach(function (b) {{ b.href = st.u; }});
     }}
     apply(FB);
-    fetch('https://raw.githubusercontent.com/aman-apk/aman-releases/main/catalog.json', {{ cache: 'no-store' }})
-      .then(function (r) {{ return r.json(); }})
-      .then(function (c) {{
-        var m = {{}};
-        c.apps.forEach(function (a) {{ m[a.packageName] = {{ v: a.versionName, s: a.sizeBytes, u: a.apkUrl }}; }});
-        apply(m);
-      }})
-      .catch(function () {{}});
+    // مرآة كلاودفلير أولاً (سوريا بلا VPN) — وGitHub خام احتياطاً صامتاً
+    function useCat(c) {{
+      var m = {{}};
+      c.apps.forEach(function (a) {{ m[a.packageName] = {{ v: a.versionName, s: a.sizeBytes, u: a.apkUrl }}; }});
+      apply(m);
+    }}
+    fetch('https://dl.amanlabs.app/catalog.json', {{ cache: 'no-store' }})
+      .then(function (r) {{ if (!r.ok) throw 0; return r.json(); }})
+      .then(useCat)
+      .catch(function () {{
+        fetch('https://raw.githubusercontent.com/aman-apk/aman-releases/main/catalog.json', {{ cache: 'no-store' }})
+          .then(function (r) {{ return r.json(); }})
+          .then(useCat)
+          .catch(function () {{}});
+      }});
   }})();
 </script>
 </body>
