@@ -76,7 +76,8 @@ FALLBACK = json.dumps(
 WIN_SETUP = "https://dl.amanlabs.app/jisr-0.2.9-windows-x64-setup.exe"
 WIN_ZIP   = "https://dl.amanlabs.app/jisr-0.2.9-windows-x64-portable.zip"
 # طيف لسطح المكتب (2026-09-08): كروميوم حقيقي عبر CEF، لا صفحة ويب في إطار.
-TAYF_WIN_SETUP = "https://dl.amanlabs.app/tayf-desktop-0.1.12-windows-x64-setup.msi"
+# مثبّت exe لا msi: مرآة كلاودفلير تخدم apk/exe/zip فقط (worker.js)
+TAYF_WIN_SETUP = "https://dl.amanlabs.app/tayf-desktop-0.1.12-windows-x64-setup.exe"
 TAYF_WIN_ZIP   = "https://dl.amanlabs.app/tayf-desktop-0.1.12-windows-x64-portable.zip"
 
 from urllib.parse import quote
@@ -393,7 +394,7 @@ HTML = f'''<!doctype html>
         <p>متصفّح طيف على كروميوم حقيقي — حجب المتعقّبات في المحرّك نفسه، وتنزيل الفيديو من الصفحة، بلا حساب ولا مزامنة.</p>
       </div>
       <div class="pc-btns">
-        <a class="btn btn-gold" href="{TAYF_WIN_SETUP}">⬇ المثبّت (MSI)</a>
+        <a class="btn btn-gold" href="{TAYF_WIN_SETUP}">⬇ المثبّت (Setup)</a>
         <a class="btn btn-ghost" href="{TAYF_WIN_ZIP}">نسخة محمولة (ZIP)</a>
         <span class="pc-note">ويندوز 10/11 · 64bit</span>
       </div>
