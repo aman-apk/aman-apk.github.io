@@ -75,6 +75,9 @@ FALLBACK = json.dumps(
 # عبر مرآة كلاودفلير — الووركر يخدم exe/zip أيضاً منذ 2026-09-03
 WIN_SETUP = "https://dl.amanlabs.app/jisr-0.2.9-windows-x64-setup.exe"
 WIN_ZIP   = "https://dl.amanlabs.app/jisr-0.2.9-windows-x64-portable.zip"
+# طيف لسطح المكتب (2026-09-08): كروميوم حقيقي عبر CEF، لا صفحة ويب في إطار.
+TAYF_WIN_SETUP = "https://dl.amanlabs.app/tayf-desktop-0.1.12-windows-x64-setup.msi"
+TAYF_WIN_ZIP   = "https://dl.amanlabs.app/tayf-desktop-0.1.12-windows-x64-portable.zip"
 
 from urllib.parse import quote
 WA_REQUEST = "https://wa.me/963943558806?text=" + quote("طلب مشروع خاص: ")
@@ -370,7 +373,7 @@ HTML = f'''<!doctype html>
 <section id="pc" style="padding-top:10px">
   <div class="wrap">
     <p class="sec-k">للحاسوب</p>
-    <h2>جسرٌ يصل هاتفك بحاسوبك</h2>
+    <h2>وللحاسوب نصيبه</h2>
     <div class="pc reveal">
       {tile("jisr")}
       <div>
@@ -380,6 +383,18 @@ HTML = f'''<!doctype html>
       <div class="pc-btns">
         <a class="btn btn-gold" href="{WIN_SETUP}">⬇ المثبّت (Setup)</a>
         <a class="btn btn-ghost" href="{WIN_ZIP}">نسخة محمولة (ZIP)</a>
+        <span class="pc-note">ويندوز 10/11 · 64bit</span>
+      </div>
+    </div>
+    <div class="pc reveal" style="margin-top:18px">
+      {tile("tayf")}
+      <div>
+        <h3>طيف لويندوز</h3>
+        <p>متصفّح طيف على كروميوم حقيقي — حجب المتعقّبات في المحرّك نفسه، وتنزيل الفيديو من الصفحة، بلا حساب ولا مزامنة.</p>
+      </div>
+      <div class="pc-btns">
+        <a class="btn btn-gold" href="{TAYF_WIN_SETUP}">⬇ المثبّت (MSI)</a>
+        <a class="btn btn-ghost" href="{TAYF_WIN_ZIP}">نسخة محمولة (ZIP)</a>
         <span class="pc-note">ويندوز 10/11 · 64bit</span>
       </div>
     </div>
