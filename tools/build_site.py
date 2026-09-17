@@ -12,9 +12,18 @@ apps = sorted(cat["apps"], key=lambda a: a["index"])
 
 def slug(pkg): return pkg.split(".")[-1]
 
+store = next(a for a in apps if a["packageName"].endswith(".store"))
+members = [a for a in apps if not a["packageName"].endswith(".store")]
+# التغبيش (حركة المالك التسويقية 2026-09-18): المغبَّش في الكاتالوغ لا يظهر في الموقع إلا بطاقةً
+# ضبابية بلا اسمٍ ولا أيقونةٍ ولا رابط — ولا تدخل أيقونتُه السبرايت ولا الكوكبة ولا لوحة الثقة،
+# فلا تُستشفّ هويته من مصدر الصفحة. الحالة الحية تُقلب من المتصفح (انظر applyHidden أسفل الصفحة).
+shown = [a for a in members if not a.get("hidden")]
+hidden_members = [a for a in members if a.get("hidden")]
+shown_slugs = {slug(a["packageName"]) for a in shown}
+
 # ═══ سبرايت الأيقونات: كل أيقونة تُعرَّف مرة واحدة وتُستنسخ بـ<use> ═══
 sprite_parts = []
-for a in apps:
+for a in [store] + shown:
     s = slug(a["packageName"])
     svg = io.open(os.path.join(ICONS, s + ".svg"), encoding="utf-8").read()
     inner = re.sub(r"^<svg[^>]*>", "", svg.strip())
@@ -29,9 +38,6 @@ def tile(s, extra_cls=""):
 
 def mb(n): return "%.1f MB" % (n / 1048576.0) if n < 1048576 * 99 else "%d MB" % round(n / 1048576.0)
 
-store = next(a for a in apps if a["packageName"].endswith(".store"))
-members = [a for a in apps if not a["packageName"].endswith(".store")]
-
 # ═══ الكوكبة في البطل ═══
 CONST = [
     ("mihrab",    "6%",  "12%", 74, 0.0), ("album",   "16%", "72%", 62, 1.1),
@@ -41,15 +47,28 @@ CONST = [
     ("sijil",     "70%", "84%", 56, 2.0), ("wathaiq", "80%", "20%", 64, 0.3),
     ("jezdan",    "86%", "66%", 52, 2.5), ("sitr",    "58%", "48%", 46, 1.9),
 ]
-orbit_tiles = "".join(tile(slug(a["packageName"])) for a in members)  # بلا بلاطة المتجر بأمر المالك
+orbit_tiles = "".join(tile(slug(a["packageName"])) for a in shown)  # بلا بلاطة المتجر بأمر المالك — ولا مغبَّش
 
 const_html = "".join(
     f'<div class="orb" style="top:{top};inset-inline-start:{start};width:{w}px;animation-delay:{d}s">{tile(s)}</div>'
-    for s, top, start, w, d in CONST)
+    for s, top, start, w, d in CONST if s in shown_slugs)
+
+# بطاقة العضو المغبَّش: هويةٌ عامة وضبابٌ — معرِّفها رقمُ الترتيب وحده (لا حزمة ولا اسم في المصدر)
+def teaser_card(idx):
+    return (f'<article class="card teaser reveal" data-tz="{idx}">'
+            f'<div class="card-head"><span class="tile tz"><i></i><b>✦</b></span>'
+            f'<div><h3 class="blur">عضوٌ جديد في العائلة</h3><p class="tag">يُكشف عند إطلاقه</p></div></div>'
+            f'<p class="sum blur">تطبيقٌ آخر يولد في بيت أمان — بلا إعلانات ولا تتبّع ولا سحابة</p>'
+            f'<div class="feats"><span>قريباً</span><span>تابع القناة</span></div>'
+            f'<div class="card-foot"><span class="meta">قريباً</span><span class="dl soon">قريباً</span></div>'
+            f'</article>')
 
 # ═══ بطاقات التطبيقات ═══
 cards = []
 for a in members:
+    if a.get("hidden"):
+        cards.append(teaser_card(a["index"]))
+        continue
     s = slug(a["packageName"])
     name_full = a["nameAr"]
     name, _, tag = name_full.partition(" — ")
@@ -68,8 +87,9 @@ for a in members:
       </article>''')
 CARDS = "".join(cards)
 
+# الاحتياط المضمَّن: الأعضاء الظاهرون والمتجر فقط — لا رابطَ ولا حزمةَ مغبَّشٍ في مصدر الصفحة
 FALLBACK = json.dumps(
-    {a["packageName"]: {"v": a["versionName"], "s": a["sizeBytes"], "u": a["apkUrl"]} for a in apps},
+    {a["packageName"]: {"v": a["versionName"], "s": a["sizeBytes"], "u": a["apkUrl"]} for a in [store] + shown},
     ensure_ascii=False)
 
 # عبر مرآة كلاودفلير — الووركر يخدم exe/zip أيضاً منذ 2026-09-03
@@ -204,6 +224,16 @@ HTML = f'''<!doctype html>
         background:color-mix(in srgb, var(--ac) 26%, var(--panel2)); color:var(--ink);
         border:1px solid color-mix(in srgb, var(--ac) 45%, transparent); transition:background .18s; }}
   .dl:hover {{ background:color-mix(in srgb, var(--ac) 42%, var(--panel2)); }}
+  /* العضو المغبَّش: بلاطة زجاجٍ مصنفر بشرارة، نصٌّ مضبَّب، وزرٌّ متقطّع بلا رابط */
+  .card.teaser {{ --ac:#E0A32E; }}
+  .card.teaser:hover {{ transform:none; }}
+  .tile.tz {{ position:relative; display:grid; place-items:center; width:64px; height:64px; border-radius:15px; flex-shrink:0;
+              background:linear-gradient(160deg, rgba(224,163,46,.45), rgba(124,137,207,.40) 55%, rgba(217,124,147,.35));
+              box-shadow:0 6px 20px rgba(0,0,0,.35); overflow:hidden; }}
+  .tile.tz i {{ position:absolute; inset:0; background:rgba(255,255,255,.07); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }}
+  .tile.tz b {{ position:relative; color:#FFF7E2; font-size:30px; line-height:1; text-shadow:0 2px 6px rgba(0,0,0,.35); }}
+  .card.teaser .blur {{ filter:blur(5px); opacity:.6; user-select:none; }}
+  .dl.soon {{ border-style:dashed; opacity:.7; cursor:default; }}
 
   /* الحاسوب */
   .pc {{ margin-top:42px; background:linear-gradient(135deg,#232f3d,#141a24 60%);
@@ -455,9 +485,7 @@ HTML = f'''<!doctype html>
       </div>
     </div>
     <div class="t-visual" aria-hidden="true">
-      {tile("mihrab")}{tile("kalamboard")}{tile("album")}{tile("ruznama")}
-      {tile("hisn")}{tile("wathaiq")}{tile("jisr")}{tile("daftar")}
-      {tile("sijil")}{tile("jezdan")}{tile("diwan")}{tile("sitr")}
+      {"".join(tile(slug(a["packageName"])) for a in shown)}
     </div>
   </div>
 </section>
@@ -513,10 +541,46 @@ HTML = f'''<!doctype html>
       if (st) document.querySelectorAll('[data-store-dl]').forEach(function (b) {{ b.href = st.u; }});
     }}
     apply(FB);
+    // التغبيش الحي (2026-09-18): الكاتالوغ المنشور يحسم من يظهر ومن يبقى ضباباً — فتبديلُ المالك
+    // من لوحة المشرف يصل الموقعَ مع أول تحميل، بلا إعادة بناء. البطاقة الحقيقية تُبنى هنا من
+    // الكاتالوغ نفسه؛ وأيقونةُ من كُشف قبل إعادة البناء تكون بلاطةً عامة حتى البناء التالي.
+    function esc(s) {{ return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {{ return {{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[c]; }}); }}
+    function teaserHtml(idx) {{
+      return '<article class="card teaser reveal in" data-tz="' + idx + '">' +
+        '<div class="card-head"><span class="tile tz"><i></i><b>✦</b></span>' +
+        '<div><h3 class="blur">عضوٌ جديد في العائلة</h3><p class="tag">يُكشف عند إطلاقه</p></div></div>' +
+        '<p class="sum blur">تطبيقٌ آخر يولد في بيت أمان — بلا إعلانات ولا تتبّع ولا سحابة</p>' +
+        '<div class="feats"><span>قريباً</span><span>تابع القناة</span></div>' +
+        '<div class="card-foot"><span class="meta">قريباً</span><span class="dl soon">قريباً</span></div></article>';
+    }}
+    function realHtml(a) {{
+      var s = a.packageName.split('.').pop();
+      var parts = String(a.nameAr || '').split(' — ');
+      var name = parts[0], tag = parts.slice(1).join(' — ');
+      var tileHtml = document.getElementById('i-' + s)
+        ? '<svg class="tile" viewBox="0 0 108 108" aria-hidden="true"><use href="#i-' + s + '"/></svg>'
+        : '<span class="tile tz"><i></i><b>' + esc(Array.from(name.trim())[0] || '•') + '</b></span>';
+      var feats = (a.featuresAr || []).slice(0, 3).map(function (f) {{ return '<span>' + esc(f) + '</span>'; }}).join('');
+      return '<article class="card reveal in" style="--ac:' + esc(a.accentHex || '#E0A32E') + '" data-pkg="' + esc(a.packageName) + '">' +
+        '<div class="card-head">' + tileHtml + '<div><h3>' + esc(name) + '</h3><p class="tag">' + esc(tag) + '</p></div></div>' +
+        '<p class="sum">' + esc(a.summaryAr || '') + '</p><div class="feats">' + feats + '</div>' +
+        '<div class="card-foot"><span class="meta"><b data-v>' + esc(a.versionName || '') + '</b> · <span data-s>' + mb(a.sizeBytes || 0) + '</span></span>' +
+        '<a class="dl" data-dl href="' + esc(a.apkUrl) + '" rel="nofollow">تنزيل APK</a></div></article>';
+    }}
+    function applyHidden(c) {{
+      c.apps.forEach(function (a) {{
+        if (/\\.store$/.test(a.packageName)) return;
+        var real = document.querySelector('.card[data-pkg="' + a.packageName + '"]');
+        var tz = document.querySelector('.card[data-tz="' + a.index + '"]');
+        if (a.hidden && real) real.outerHTML = teaserHtml(a.index);
+        else if (!a.hidden && tz) tz.outerHTML = realHtml(a);
+      }});
+    }}
     // مرآة كلاودفلير أولاً (سوريا بلا VPN) — وGitHub خام احتياطاً صامتاً
     function useCat(c) {{
       var m = {{}};
       c.apps.forEach(function (a) {{ m[a.packageName] = {{ v: a.versionName, s: a.sizeBytes, u: a.apkUrl }}; }});
+      try {{ applyHidden(c); }} catch (e) {{}}
       apply(m);
     }}
     fetch('https://dl.amanlabs.app/catalog.json', {{ cache: 'no-store' }})
