@@ -63,30 +63,41 @@ def teaser_card(idx):
             f'<div class="card-foot"><span class="meta">قريباً</span><span class="dl soon">قريباً</span></div>'
             f'</article>')
 
-# ═══ بطاقات التطبيقات ═══
-cards = []
-for a in members:
-    if a.get("hidden"):
-        cards.append(teaser_card(a["index"]))
-        continue
-    s = slug(a["packageName"])
-    name_full = a["nameAr"]
-    name, _, tag = name_full.partition(" — ")
-    feats = "".join(f"<span>{f}</span>" for f in a["featuresAr"][:3])
-    cards.append(f'''
+# ═══ بطاقات التطبيقات (عربية وإنكليزية من الحقول نفسها) ═══
+def build_cards(lang):
+    ar = lang == "ar"
+    out = []
+    for a in members:
+        if a.get("hidden"):
+            out.append(teaser_card(a["index"]) if ar else teaser_card_en(a["index"]))
+            continue
+        s_ = slug(a["packageName"])
+        name_full = a["nameAr"] if ar else a["nameEn"]
+        name, _, tag = name_full.partition(" — ")
+        feats = "".join(f"<span>{f}</span>" for f in (a["featuresAr"] if ar else a["featuresEn"])[:3])
+        out.append(f'''
       <article class="card reveal" style="--ac:{a['accentHex']}" data-pkg="{a['packageName']}">
-        <div class="card-head">{tile(s)}
+        <div class="card-head">{tile(s_)}
           <div><h3>{name}</h3><p class="tag">{tag}</p></div>
         </div>
-        <p class="sum">{a['summaryAr']}</p>
+        <p class="sum">{a['summaryAr'] if ar else a['summaryEn']}</p>
         <div class="feats">{feats}</div>
         <div class="card-foot">
           <span class="meta"><b data-v>{a['versionName']}</b> · <span data-s>{mb(a['sizeBytes'])}</span></span>
-          <a class="dl" data-dl href="{a['apkUrl']}" rel="nofollow">تنزيل APK</a>
+          <a class="dl" data-dl href="{a['apkUrl']}" rel="nofollow">{"تنزيل APK" if ar else "Download APK"}</a>
         </div>
       </article>''')
-CARDS = "".join(cards)
-
+    return "".join(out)
+def teaser_card_en(idx):
+    return (f'<article class="card teaser reveal" data-tz="{idx}">'
+            f'<div class="card-head"><span class="tile tz"><i></i><b>✦</b></span>'
+            f'<div><h3 class="blur">A new family member</h3><p class="tag">Revealed at launch</p></div></div>'
+            f'<p class="sum blur">Another app born in the Aman house — no ads, no tracking, no cloud</p>'
+            f'<div class="feats"><span>Soon</span><span>Stay tuned</span></div>'
+            f'<div class="card-foot"><span class="meta">Soon</span><span class="dl soon">Soon</span></div>'
+            f'</article>')
+CARDS = build_cards("ar")
+CARDS_EN = build_cards("en")
 # الاحتياط المضمَّن: الأعضاء الظاهرون والمتجر فقط — لا رابطَ ولا حزمةَ مغبَّشٍ في مصدر الصفحة
 FALLBACK = json.dumps(
     {a["packageName"]: {"v": a["versionName"], "s": a["sizeBytes"], "u": a["apkUrl"]} for a in [store] + shown},
@@ -116,6 +127,8 @@ HTML = f'''<!doctype html>
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://amanlabs.app/">
 <link rel="canonical" href="https://amanlabs.app/">
+<link rel="alternate" hreflang="en" href="https://amanlabs.app/en/">
+<link rel="alternate" hreflang="ar" href="https://amanlabs.app/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'%3E%3Crect width='108' height='108' rx='24' fill='%23131826'/%3E%3Ccircle cx='54' cy='54' r='20' fill='%23E0A32E'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -333,6 +346,7 @@ HTML = f'''<!doctype html>
     <div class="navlinks">
       <a href="#apps">التطبيقات</a><a href="#principles">مبادئنا</a>
       <a href="#pc">للحاسوب</a><a href="#services">خدماتنا</a><a href="#trust">الثقة</a>
+      <a href="/en/" lang="en" hreflang="en" title="English">EN</a>
     </div>
     <a class="nav-cta" data-store-dl href="{store['apkUrl']}">نزّل المتجر</a>
   </div>
@@ -590,15 +604,115 @@ os.makedirs(os.path.dirname(OUT), exist_ok=True)
 io.open(OUT, "w", encoding="utf-8").write(HTML)
 print("site written:", OUT, len(HTML), "chars")
 
-# amanlabs.app/store — رابط ثابت للطباعة ورموز QR: يوجّه دوماً لأحدث APK للمتجر من الكاتالوغ
-store_dir = os.path.join(os.path.dirname(OUT), "store")
-os.makedirs(store_dir, exist_ok=True)
-io.open(os.path.join(store_dir, "index.html"), "w", encoding="utf-8").write(
-    f'''<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
-<title>تنزيل متجر أمان</title>
-<meta http-equiv="refresh" content="0;url={store['apkUrl']}">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>body{{font-family:sans-serif;background:#0B0E15;color:#F2EDE3;display:grid;place-items:center;min-height:100vh;text-align:center}}a{{color:#E0A32E}}</style>
-</head><body><p>يبدأ تنزيل متجر أمان الآن…<br><a href="{store['apkUrl']}">اضغط هنا إن لم يبدأ تلقائياً</a></p>
-<script>location.replace({json.dumps(store['apkUrl'])});</script></body></html>''')
-print("store redirect written ->", store["apkUrl"])
+# ═══ الصفحة الإنكليزية: القالب العربي نفسه مع تبديل النصوص والاتجاه ═══
+T = [
+    ('<html lang="ar" dir="rtl">', '<html lang="en" dir="ltr">'),
+    ('<title>مختبرات أمان — عائلة تطبيقات الخصوصية العربية</title>', '<title>Aman Labs — privacy-first Arabic apps</title>'),
+    ('<meta property="og:title" content="مختبرات أمان — عائلة تطبيقات الخصوصية العربية">', '<meta property="og:title" content="Aman Labs — privacy-first Arabic apps">'),
+    ('<meta property="og:url" content="https://amanlabs.app/">', '<meta property="og:url" content="https://amanlabs.app/en/">'),
+    ('<link rel="canonical" href="https://amanlabs.app/">', '<link rel="canonical" href="https://amanlabs.app/en/">'),
+    ('<a href="/en/" lang="en" hreflang="en" title="English">EN</a>', '<a href="/" lang="ar" hreflang="ar" title="العربية">عربي</a>'),
+    ('مختبرات أمان</a>', 'Aman Labs</a>'),
+    ('<a href="#apps">التطبيقات</a><a href="#principles">مبادئنا</a>', '<a href="#apps">Apps</a><a href="#principles">Principles</a>'),
+    ('<a href="#pc">للحاسوب</a><a href="#services">خدماتنا</a><a href="#trust">الثقة</a>', '<a href="#pc">Desktop</a><a href="#services">Services</a><a href="#trust">Trust</a>'),
+    ('>نزّل المتجر</a>', '>Get the store</a>'),
+    ('<p class="kicker">عائلة أمان · Aman Labs</p>', '<p class="kicker">Aman Labs · عائلة أمان</p>'),
+    ('<h1>تطبيقاتٌ عربيةٌ تعمل لك،<br>لا عليك.</h1>', '<h1>Arabic apps that work for you,<br>not on you.</h1>'),
+    ('<p class="sub">أربعة عشر تطبيقاً وُلدت في بيتٍ واحد: <b>بلا إعلانات، بلا تتبّع، بلا سحابة</b>. بياناتك تبقى على جهازك، وأكثر التطبيقات يعمل دون اتصالٍ بالإنترنت أصلاً.</p>',
+     '<p class="sub">Fourteen apps from one house: <b>no ads, no tracking, no cloud</b>. Your data stays on your phone, and most of the apps do not even have an internet permission.</p>'),
+    ('>⬇ نزّل متجر أمان (APK)</a>', '>⬇ Download Aman Store (APK)</a>'),
+    ('>تعرف على التطبيقات</a>', '>Meet the apps</a>'),
+    ('<span class="chip"><b>14</b> تطبيقاً</span>', '<span class="chip"><b>14</b> apps</span>'),
+    ('<span class="chip"><b>0</b> إعلانات</span>', '<span class="chip"><b>0</b> ads</span>'),
+    ('<span class="chip"><b>0</b> متتبّعات</span>', '<span class="chip"><b>0</b> trackers</span>'),
+    ('<span class="chip"><b>100%</b> عربي أولاً</span>', '<span class="chip"><b>100%</b> Arabic first</span>'),
+    ('<p class="sec-k">مبادئنا</p>', '<p class="sec-k">Principles</p>'),
+    ('<h2>الخصوصية عندنا مبدأ، لا إعداد</h2>', '<h2>Privacy is a principle here, not a setting</h2>'),
+    ('<p class="lead">لا نطلب منك أن تثق بوعودنا — نبني التطبيق بحيث لا يحتاج ثقتك أصلاً.</p>', '<p class="lead">We do not ask you to trust a promise. We build the app so that it does not need your trust in the first place.</p>'),
+    ('<h3>بلا إنترنت حيث يجب</h3><p>الوثائق والتقويم والإشعارات والسِتر: حزمها لا تحمل إذن الإنترنت أصلاً — تحقّق بنفسك من إعدادات النظام.</p>',
+     '<h3>No internet where it matters</h3><p>Documents, calendar, notifications, photo vault: their packages carry no internet permission at all. Check it yourself in system settings.</p>'),
+    ('<h3>توقيع يُفحص قبل التثبيت</h3><p>متجر أمان يطابق بصمة توقيع كل حزمة مع بصمتها المثبّتة لديه — حزمة مزوّرة لا تمرّ.</p>',
+     '<h3>Signature checked before install</h3><p>Aman Store compares every package\'s signing fingerprint with the one pinned in its catalog. A forged package does not get through.</p>'),
+    ('<h3>ينتشر جهازاً لجهاز</h3><p>المتجر وتطبيقاته تُشارَك بالقرب دون إنترنت — يكفي أن يملكه صديقك ليصلك كل شيء.</p>',
+     '<h3>Spreads phone to phone</h3><p>The store and its apps can be shared nearby without internet. If a friend has it, you can have everything.</p>'),
+    ('<h3>عربيٌّ أولاً</h3><p>من اليمين إلى اليسار تصميماً لا ترجمةً — بخط المراعي وذوقٍ واحد يجمع العائلة كلها.</p>',
+     '<h3>Arabic first</h3><p>Designed right-to-left, not translated afterwards, in the Almarai typeface and one visual language across the whole family.</p>'),
+    ('<p class="sec-k">العائلة</p>', '<p class="sec-k">The family</p>'),
+    ('<h2>أربعة عشر فرداً، بيتٌ واحد</h2>', '<h2>Fourteen members, one house</h2>'),
+    ('<p class="lead">كل تطبيقٍ يسدّ حاجةً يومية حقيقية — ويشارك إخوته المبدأ نفسه: بياناتك ملكك وحدك.</p>', '<p class="lead">Each app covers a real daily need, and shares the same rule with its siblings: your data belongs to you alone.</p>'),
+    ('<h3>متجر أمان <span class="en">· Aman Store</span></h3>', '<h3>Aman Store <span class="en">· متجر أمان</span></h3>'),
+    ('>⬇ تنزيل المتجر</a>', '>⬇ Download the store</a>'),
+    ('<span class="meta">الإصدار <b data-v>', '<span class="meta">Version <b data-v>'),
+    (' · أندرويد 7+</span>', ' · Android 7+</span>'),
+    ('<p class="sec-k">للحاسوب</p>', '<p class="sec-k">Desktop</p>'),
+    ('<h2>وللحاسوب نصيبه</h2>', '<h2>The desktop gets its share</h2>'),
+    ('<h3>جسر لويندوز</h3>', '<h3>Jisr for Windows</h3>'),
+    ('<p>انقل الملفات بين هاتفك وحاسوبك عبر شبكتك المحلية وحدها — بلا كابل ولا سحابة ولا حدود حجم.</p>', '<p>Move files between your phone and your computer over your local network only. No cable, no cloud, no size limit.</p>'),
+    ('<h3>طيف لويندوز</h3>', '<h3>Tayf for Windows</h3>'),
+    ('<p>متصفّح طيف على كروميوم حقيقي — حجب المتعقّبات في المحرّك نفسه، وتنزيل الفيديو من الصفحة، بلا حساب ولا مزامنة.</p>', '<p>Tayf on real Chromium: tracker blocking inside the engine, video download from the page, no account and no sync.</p>'),
+    ('>⬇ المثبّت (Setup)</a>', '>⬇ Installer (Setup)</a>'),
+    ('>نسخة محمولة (ZIP)</a>', '>Portable (ZIP)</a>'),
+    ('<span class="pc-note">ويندوز 10/11 · 64bit</span>', '<span class="pc-note">Windows 10/11 · 64-bit</span>'),
+    ('<p class="sec-k">كيف يصلك أمان؟</p>', '<p class="sec-k">How to get it</p>'),
+    ('<h2>ثلاث خطوات، ثم لا حاجة للإنترنت</h2>', '<h2>Three steps, then no internet needed</h2>'),
+    ('<h3>نزّل متجر أمان</h3><p>ملف APK واحد من هذه الصفحة — ثبّته واسمح بمصادر التثبيت حين يسألك أندرويد.</p>', '<h3>Download Aman Store</h3><p>One APK from this page. Install it and allow this source when Android asks.</p>'),
+    ('<h3>ثبّت ما تحب</h3><p>تصفح العائلة داخل المتجر وثبّت بنقرة — المتجر يفحص توقيع كل حزمة قبل تثبيتها.</p>', '<h3>Install what you like</h3><p>Browse the family inside the store and install with one tap. The store verifies each package\'s signature first.</p>'),
+    ('<h3>شاركه من جهازٍ لجهاز</h3><p>مرّر المتجر وتطبيقاته لأهلك وأصدقائك بالمشاركة القريبة أو عبر جسر — بلا إنترنت إطلاقاً.</p>', '<h3>Pass it on</h3><p>Hand the store and its apps to family and friends with nearby sharing or through Jisr. No internet involved.</p>'),
+    ('<p class="sec-k">خدماتنا</p>', '<p class="sec-k">Services</p>'),
+    ('<h2>لديك <span style="color:var(--gold)">فكرة</span> تطبيق؟ ننفّذها لك</h2>', '<h2>Have an <span style="color:var(--gold)">idea</span> for an app? We build it</h2>'),
+    ('<p class="svc-body">تبحث عن جهةٍ تنفّذها؟ نبني المواقع والتطبيقات من الفكرة إلى الإطلاق — والدليل أمامك: هذه العائلة كلها صنعتُنا. أرسل فكرتك، ونعود إليك بخطةٍ وسعرٍ واضحين قبل أي التزام.</p>',
+     '<p class="svc-body">Looking for someone to build it? We take websites and apps from idea to launch, and the proof is on this page: this whole family is our work. Send the idea and you get a plan and a clear price before any commitment.</p>'),
+    ('<div class="svc-f"><span>🧩</span>مواقع وتطبيقات ومتاجر وأنظمة خاصة</div>', '<div class="svc-f"><span>🧩</span>Websites, apps, stores and custom systems</div>'),
+    ('<div class="svc-f"><span>🚀</span>تنفيذ كامل: تصميم وبرمجة ونشر</div>', '<div class="svc-f"><span>🚀</span>End to end: design, code, release</div>'),
+    ('<div class="svc-f"><span>🤝</span>سعر منافس يُتَّفق عليه قبل البدء</div>', '<div class="svc-f"><span>🤝</span>A fair price agreed before work starts</div>'),
+    ('>أرسل فكرتك عبر واتساب</a>', '>Send your idea on WhatsApp</a>'),
+    ('<p>أمان مشروعٌ مستقل لا يقصد الربح: لا إعلانات، ولا ثمن خفيّ. تطبيقاته كاملة للجميع دوماً، ودعمكم الاختياري يُبقيها كذلك — <b>ستُتاح طرق المساهمة قريباً</b>، لمزيدٍ من مشاريع الخصوصية: شات، تخزين سحابي آمن، VPN…</p>',
+     '<p>Aman is an independent, non-commercial project: no ads, no hidden price. The apps are complete for everyone, always, and optional support keeps them that way. <b>Ways to contribute are coming</b>, for more privacy projects: chat, safe cloud storage, VPN…</p>'),
+    ('>واجهتك مشكلة في تطبيق؟ أبلغنا عنها ↲</a>', '>Something broke in an app? Tell us ↲</a>'),
+    ('<p class="sec-k">الثقة تُبنى بالهندسة</p>', '<p class="sec-k">Trust is engineered</p>'),
+    ('<h2>شفافيةٌ يمكنك التحقق منها بنفسك</h2>', '<h2>Transparency you can verify yourself</h2>'),
+    ('<b>بصمات توقيع معلنة ومثبّتة</b><p>بصمة SHA-256 لتوقيع كل تطبيق منشورة في كاتالوغ عام، والمتجر يرفض أي حزمة تخالفها.</p>', '<b>Published, pinned signing fingerprints</b><p>The SHA-256 of each app\'s signing certificate is in a public catalog, and the store rejects any package that does not match.</p>'),
+    ('<b>بصمة لكل ملف</b><p>لكل حزمة sha256 معلنة — تستطيع التحقق من أي ملف نزّلته بنفسك قبل تثبيته.</p>', '<b>A hash for every file</b><p>Every package has a published sha256, so you can check any download yourself before installing.</p>'),
+    ('<b>حارس بناءٍ صارم</b><p>التطبيقات الحساسة تُبنى بحارسٍ يفشل البناء كله إن تسلّلت أي مكتبة شبكية أو إذنٌ غير مبرَّر.</p>', '<b>A strict build guard</b><p>Sensitive apps are built with a guard that fails the whole build if a networking library or an unjustified permission slips in.</p>'),
+    ('<b>بياناتك تغادر معك فقط</b><p>نسخ احتياطي موحّد مشفّر بمفتاحٍ تحفظه أنت — لا حسابات ولا خوادم ولا «مزامنة» خفية.</p>', '<b>Your data leaves only with you</b><p>One encrypted family backup, unlocked by a key you keep. No accounts, no servers, no hidden "sync".</p>'),
+    ('>تواصل واتساب</a>', '>WhatsApp</a>'),
+    ('<p class="f-note">© 2026 مختبرات أمان · Aman Labs — جميع الحقوق محفوظة.</p>', '<p class="f-note">© 2026 Aman Labs · مختبرات أمان. All rights reserved.</p>'),
+    # سكربت البطاقات الحي
+    ("<h3 class=\"blur\">عضوٌ جديد في العائلة</h3><p class=\"tag\">يُكشف عند إطلاقه</p>", "<h3 class=\"blur\">A new family member</h3><p class=\"tag\">Revealed at launch</p>"),
+    ("<p class=\"sum blur\">تطبيقٌ آخر يولد في بيت أمان — بلا إعلانات ولا تتبّع ولا سحابة</p>", "<p class=\"sum blur\">Another app born in the Aman house — no ads, no tracking, no cloud</p>"),
+    ("<div class=\"feats\"><span>قريباً</span><span>تابع القناة</span></div>", "<div class=\"feats\"><span>Soon</span><span>Stay tuned</span></div>"),
+    ("<span class=\"meta\">قريباً</span><span class=\"dl soon\">قريباً</span>", "<span class=\"meta\">Soon</span><span class=\"dl soon\">Soon</span>"),
+    ("String(a.nameAr || '')", "String(a.nameEn || a.nameAr || '')"),
+    ("(a.featuresAr || [])", "(a.featuresEn || a.featuresAr || [])"),
+    ("esc(a.summaryAr || '')", "esc(a.summaryEn || a.summaryAr || '')"),
+    ('rel="nofollow">تنزيل APK</a>', 'rel="nofollow">Download APK</a>'),
+]
+HTML_EN = HTML
+HTML_EN = HTML_EN.replace(CARDS, CARDS_EN, 1)
+HTML_EN = HTML_EN.replace(store['descriptionAr'], store['descriptionEn'], 1)
+HTML_EN = re.sub(r'<meta name="description" content="[^"]*">',
+                 '<meta name="description" content="Fourteen Arabic-first Android apps with no ads, no tracking and no cloud. Your data stays on your phone; most apps work without internet. Free, signed, verifiable.">', HTML_EN, 1)
+HTML_EN = re.sub(r'<meta property="og:description" content="[^"]*">',
+                 '<meta property="og:description" content="Fourteen Arabic-first apps: no ads, no tracking, no cloud. Most work without internet.">', HTML_EN, 1)
+missing = []
+for a_, b_ in T:
+    if a_ not in HTML_EN:
+        missing.append(a_[:60]); continue
+    HTML_EN = HTML_EN.replace(a_, b_)
+if missing:
+    print("EN: untranslated fragments:", missing)
+rest = re.findall(r'>[^<{}]*[\u0600-\u06FF][^<]*<', HTML_EN.split("<script>")[0].split("</style>")[-1])
+rest = [r for r in rest if "متجر أمان" not in r and "عائلة أمان" not in r and "عربي" not in r and "مختبرات" not in r]
+if rest:
+    print("EN: Arabic text still visible:", rest[:8])
+en_dir = os.path.join(os.path.dirname(OUT), "en")
+os.makedirs(en_dir, exist_ok=True)
+io.open(os.path.join(en_dir, "index.html"), "w", encoding="utf-8").write(HTML_EN)
+print("site written:", os.path.join(en_dir, "index.html"), len(HTML_EN), "chars")
+# نظام ملفات ويندوز لا يفرّق EN/en فلا مجلدَ بديل؛ GitHub Pages يخدم 404.html لأي مسارٍ مفقود،
+# ومنها نحوّل /EN و/En وأشباهها إلى /en/ بالجافاسكربت.
+io.open(os.path.join(os.path.dirname(OUT), "404.html"), "w", encoding="utf-8").write(
+    '<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>Aman Labs</title>'
+    '<script>(function(){var p=location.pathname.toLowerCase();'
+    'if(/^\/en\/?$/.test(p)){location.replace("/en/");}else{location.replace("/");}})();</script>'
+    '</head><body><a href="/">amanlabs.app</a></body></html>')
