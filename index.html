@@ -156,8 +156,6 @@
                background:rgba(224,163,46,.12); color:var(--gold); }
   .t-item b { display:block; font-size:15.5px; }
   .t-item p { color:var(--muted); font-size:13px; }
-  .t-links { margin-top:26px; display:flex; gap:16px; flex-wrap:wrap; font-size:13.5px; }
-  .t-links a { color:var(--gold); border-bottom:1px dashed rgba(224,163,46,.4); padding-bottom:2px; }
   .t-visual { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; direction:ltr; }
   .t-visual .tile { width:100%; height:auto; border-radius:20%; opacity:.92;
                     box-shadow:0 8px 26px rgba(0,0,0,.4); transition:transform .2s; }
@@ -443,10 +441,6 @@
         <div class="t-item reveal"><div class="ic">🛡</div><div><b>حارس بناءٍ صارم</b><p>التطبيقات الحساسة تُبنى بحارسٍ يفشل البناء كله إن تسلّلت أي مكتبة شبكية أو إذنٌ غير مبرَّر.</p></div></div>
         <div class="t-item reveal"><div class="ic">🗝</div><div><b>بياناتك تغادر معك فقط</b><p>نسخ احتياطي موحّد مشفّر بمفتاحٍ تحفظه أنت — لا حسابات ولا خوادم ولا «مزامنة» خفية.</p></div></div>
       </div>
-      <div class="t-links">
-        <a href="https://github.com/aman-apk/aman-releases/blob/main/catalog.json" rel="noopener">كاتالوغ الشفافية</a>
-        <a href="https://github.com/aman-apk/aman-releases/releases/tag/v1.1.0" rel="noopener">كل الإصدارات على GitHub</a>
-      </div>
     </div>
     <div class="t-visual" aria-hidden="true">
       <svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-kalamboard"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-mihrab"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-tayf"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-album"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-hisn"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-jisr"/></svg>
@@ -459,7 +453,6 @@
     <a class="brand" href="#top"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-store"/></svg> مختبرات أمان</a>
     <div class="f-links">
       <a href="https://wa.me/963943558806" rel="noopener">تواصل واتساب</a>
-      <a href="https://github.com/aman-apk" rel="noopener">GitHub</a>
     </div>
     <p class="f-note">© 2026 مختبرات أمان · Aman Labs — جميع الحقوق محفوظة.</p>
   </div>
@@ -540,7 +533,7 @@
         else if (!a.hidden && tz) tz.outerHTML = realHtml(a);
       });
     }
-    // مرآة كلاودفلير أولاً (سوريا بلا VPN) — وGitHub خام احتياطاً صامتاً
+    // مرآة كلاودفلير (سوريا بلا VPN) — لا احتياط خارجي: لا يُذكر أي مضيف آخر في الصفحة
     function useCat(c) {
       var m = {};
       c.apps.forEach(function (a) { m[a.packageName] = { v: a.versionName, s: a.sizeBytes, u: a.apkUrl }; });
@@ -550,12 +543,7 @@
     fetch('https://dl.amanlabs.app/catalog.json', { cache: 'no-store' })
       .then(function (r) { if (!r.ok) throw 0; return r.json(); })
       .then(useCat)
-      .catch(function () {
-        fetch('https://raw.githubusercontent.com/aman-apk/aman-releases/main/catalog.json', { cache: 'no-store' })
-          .then(function (r) { return r.json(); })
-          .then(useCat)
-          .catch(function () {});
-      });
+      .catch(function () {});
   })();
 </script>
 </body>
