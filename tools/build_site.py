@@ -271,6 +271,7 @@ HTML = f'''<!doctype html>
   /* الثقة */
   .trust {{ background:linear-gradient(180deg, var(--night2), var(--night)); border-block:1px solid var(--line); }}
   .trust-in {{ display:grid; grid-template-columns:1.1fr 1fr; gap:44px; align-items:center; }}
+  .dlc {{ color:var(--gold); white-space:nowrap; display:inline-flex; align-items:center; gap:3px; }}
   .t-list {{ display:flex; flex-direction:column; gap:16px; margin-top:26px; }}
   .t-item {{ display:flex; gap:13px; align-items:flex-start; }}
   .t-item .ic {{ flex-shrink:0; width:38px; height:38px; border-radius:11px; display:grid; place-items:center;
@@ -596,6 +597,26 @@ HTML = f'''<!doctype html>
       .then(function (r) {{ if (!r.ok) throw 0; return r.json(); }})
       .then(useCat)
       .catch(function () {{}});
+    // عدّاد التنزيلات (2026-09-25): تُحصيه المرآة لكل عضو — يُلحق بسطر الإصدار والحجم في كل بطاقة
+    function fmtCount(n) {{ n = +n || 0; if (n >= 1e6) return (Math.round(n / 1e5) / 10) + 'M'; if (n >= 1e3) return (Math.round(n / 100) / 10) + 'k'; return String(n); }}
+    function statsKey(pkg) {{ var t = pkg.split('.').pop().toLowerCase(); return t === 'store' ? 'amanstore' : t; }}
+    var DL_ICON = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>';
+    function applyStats(st) {{
+      var d = (st && st.downloads) || {{}};
+      document.querySelectorAll('[data-pkg]').forEach(function (el) {{
+        var n = d[statsKey(el.getAttribute('data-pkg'))];
+        if (!n) return;
+        var meta = el.querySelector('.meta');
+        if (!meta || meta.querySelector('.dlc')) return;
+        var s = document.createElement('span'); s.className = 'dlc'; s.title = 'عدد التنزيلات';
+        s.innerHTML = DL_ICON + ' ' + fmtCount(n);
+        meta.appendChild(document.createTextNode(' · ')); meta.appendChild(s);
+      }});
+    }}
+    fetch('https://dl.amanlabs.app/stats.json', {{ cache: 'no-store' }})
+      .then(function (r) {{ if (!r.ok) throw 0; return r.json(); }})
+      .then(applyStats)
+      .catch(function () {{}});
   }})();
 </script>
 </body>
@@ -688,6 +709,7 @@ T = [
     ("(a.featuresAr || [])", "(a.featuresEn || a.featuresAr || [])"),
     ("esc(a.summaryAr || '')", "esc(a.summaryEn || a.summaryAr || '')"),
     ('rel="nofollow">تنزيل APK</a>', 'rel="nofollow">Download APK</a>'),
+    ("s.title = 'عدد التنزيلات';", "s.title = 'downloads';"),
 ]
 HTML_EN = HTML
 HTML_EN = HTML_EN.replace(CARDS, CARDS_EN, 1)
