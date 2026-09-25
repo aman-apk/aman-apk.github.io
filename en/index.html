@@ -154,7 +154,8 @@
   /* الثقة */
   .trust { background:linear-gradient(180deg, var(--night2), var(--night)); border-block:1px solid var(--line); }
   .trust-in { display:grid; grid-template-columns:1.1fr 1fr; gap:44px; align-items:center; }
-  .dlc { color:var(--gold); white-space:nowrap; display:inline-flex; align-items:center; gap:3px; }
+  .dlc { color:var(--gold); white-space:nowrap; display:inline-flex; align-items:center; gap:4px; font-weight:800; background:rgba(224,163,46,.10); border:1px solid rgba(224,163,46,.28); border-radius:999px; padding:2px 9px 2px 7px; font-size:12px; margin-inline-start:6px; }
+  .dlc small { font-weight:600; opacity:.8; font-size:11px; }
   .t-list { display:flex; flex-direction:column; gap:16px; margin-top:26px; }
   .t-item { display:flex; gap:13px; align-items:flex-start; }
   .t-item .ic { flex-shrink:0; width:38px; height:38px; border-radius:11px; display:grid; place-items:center;
@@ -562,8 +563,8 @@
         var meta = el.querySelector('.meta');
         if (!meta || meta.querySelector('.dlc')) return;
         var s = document.createElement('span'); s.className = 'dlc'; s.title = 'downloads';
-        s.innerHTML = DL_ICON + ' ' + fmtCount(n);
-        meta.appendChild(document.createTextNode(' · ')); meta.appendChild(s);
+        s.innerHTML = DL_ICON + fmtCount(n) + ' <small>downloads</small>';
+        meta.appendChild(s);
       });
     }
     fetch('https://dl.amanlabs.app/stats.json', { cache: 'no-store' })
