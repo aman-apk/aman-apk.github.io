@@ -271,8 +271,15 @@ HTML = f'''<!doctype html>
   /* الثقة */
   .trust {{ background:linear-gradient(180deg, var(--night2), var(--night)); border-block:1px solid var(--line); }}
   .trust-in {{ display:grid; grid-template-columns:1.1fr 1fr; gap:44px; align-items:center; }}
-  .dlc {{ color:var(--gold); white-space:nowrap; display:inline-flex; align-items:center; gap:4px; font-weight:800; background:rgba(224,163,46,.10); border:1px solid rgba(224,163,46,.28); border-radius:999px; padding:2px 9px 2px 7px; font-size:12px; margin-inline-start:6px; }}
-  .dlc small {{ font-weight:600; opacity:.8; font-size:11px; }}
+  .twrap {{ position:relative; display:inline-flex; flex-shrink:0; }}
+  .tcount {{ position:absolute; inset-inline-start:-6px; bottom:-7px; display:inline-flex; align-items:center; gap:3px; padding:3px 8px 3px 6px; border-radius:999px;
+             background:linear-gradient(135deg, rgba(14,17,26,.97), rgba(34,30,22,.97)); color:#F5D27A; font-size:11.5px; font-weight:800; line-height:1;
+             border:1px solid rgba(240,205,122,.55); box-shadow:0 4px 12px rgba(0,0,0,.45), 0 0 0 3px var(--panel), 0 0 14px rgba(224,163,46,.25);
+             animation:trise .5s cubic-bezier(.2,.8,.2,1) both; }}
+  .tcount svg {{ width:11px; height:11px; color:var(--gold); }}
+  .tcount small {{ font-size:9.5px; font-weight:600; color:rgba(245,210,122,.75); margin-inline-start:1px; }}
+  .store-card .tcount {{ font-size:13px; padding:4px 10px 4px 8px; bottom:-9px; }}
+  @keyframes trise {{ from {{ opacity:0; transform:translateY(5px) scale(.85); }} to {{ opacity:1; transform:none; }} }}
   .t-list {{ display:flex; flex-direction:column; gap:16px; margin-top:26px; }}
   .t-item {{ display:flex; gap:13px; align-items:flex-start; }}
   .t-item .ic {{ flex-shrink:0; width:38px; height:38px; border-radius:11px; display:grid; place-items:center;
@@ -607,11 +614,14 @@ HTML = f'''<!doctype html>
       document.querySelectorAll('[data-pkg]').forEach(function (el) {{
         var n = d[statsKey(el.getAttribute('data-pkg'))];
         if (!n) return;
-        var meta = el.querySelector('.meta');
-        if (!meta || meta.querySelector('.dlc')) return;
-        var s = document.createElement('span'); s.className = 'dlc'; s.title = 'عدد التنزيلات';
-        s.innerHTML = DL_ICON + fmtCount(n) + ' <small>تنزيل</small>';
-        meta.appendChild(s);
+        var tile = el.querySelector('.tile');
+        if (!tile || tile.parentNode.classList.contains('twrap')) return;
+        // كبسولة العدّاد على زاوية الأيقونة — كما في المتجر
+        var wrap = document.createElement('span'); wrap.className = 'twrap';
+        tile.parentNode.insertBefore(wrap, tile); wrap.appendChild(tile);
+        var s = document.createElement('span'); s.className = 'tcount'; s.title = 'عدد التنزيلات';
+        s.innerHTML = DL_ICON + '<b>' + fmtCount(n) + '</b><small>تنزيل</small>';
+        wrap.appendChild(s);
       }});
     }}
     fetch('https://dl.amanlabs.app/stats.json', {{ cache: 'no-store' }})
@@ -711,7 +721,7 @@ T = [
     ("esc(a.summaryAr || '')", "esc(a.summaryEn || a.summaryAr || '')"),
     ('rel="nofollow">تنزيل APK</a>', 'rel="nofollow">Download APK</a>'),
     ("s.title = 'عدد التنزيلات';", "s.title = 'downloads';"),
-    ("' <small>تنزيل</small>'", "' <small>downloads</small>'"),
+    ("'<small>تنزيل</small>'", "'<small>downloads</small>'"),
 ]
 HTML_EN = HTML
 HTML_EN = HTML_EN.replace(CARDS, CARDS_EN, 1)
