@@ -716,5 +716,18 @@ print("site written:", os.path.join(en_dir, "index.html"), len(HTML_EN), "chars"
 io.open(os.path.join(os.path.dirname(OUT), "404.html"), "w", encoding="utf-8").write(
     '<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>Aman Labs</title>'
     '<script>(function(){var p=location.pathname.toLowerCase();'
-    'if(/^\/en\/?$/.test(p)){location.replace("/en/");}else{location.replace("/");}})();</script>'
+    r'if(/^\/en\/?$/.test(p)){location.replace("/en/");}else{location.replace("/");}})();</script>'
     '</head><body><a href="/">amanlabs.app</a></body></html>')
+
+# amanlabs.app/store — رابط ثابت للطباعة ورموز QR: يوجّه دوماً لأحدث APK للمتجر من الكاتالوغ
+store_dir = os.path.join(os.path.dirname(OUT), "store")
+os.makedirs(store_dir, exist_ok=True)
+io.open(os.path.join(store_dir, "index.html"), "w", encoding="utf-8").write(
+    f'''<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<title>تنزيل متجر أمان</title>
+<meta http-equiv="refresh" content="0;url={store['apkUrl']}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{{font-family:sans-serif;background:#0B0E15;color:#F2EDE3;display:grid;place-items:center;min-height:100vh;text-align:center}}a{{color:#E0A32E}}</style>
+</head><body><p>يبدأ تنزيل متجر أمان الآن…<br><a href="{store['apkUrl']}">اضغط هنا إن لم يبدأ تلقائياً</a></p>
+<script>location.replace({json.dumps(store['apkUrl'])});</script></body></html>''')
+print("store redirect written ->", store["apkUrl"])
