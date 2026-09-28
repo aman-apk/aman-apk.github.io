@@ -70,6 +70,11 @@
   .btn-gold { background:linear-gradient(135deg,#EDB84A,var(--gold)); color:#221a05;
               box-shadow:0 8px 28px rgba(224,163,46,.28); }
   .btn-gold:hover { box-shadow:0 10px 36px rgba(224,163,46,.42); transform:translateY(-2px); }
+  .btn-glass { color:#F7E3AE; background:linear-gradient(135deg, rgba(224,163,46,.16), rgba(255,255,255,.04));
+               border:1px solid rgba(240,205,122,.55); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+               box-shadow:0 10px 34px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.14), 0 0 0 1px rgba(224,163,46,.12); }
+  .btn-glass:hover { border-color:var(--gold); box-shadow:0 14px 40px rgba(224,163,46,.22), inset 0 1px 0 rgba(255,255,255,.18); transform:translateY(-2px); color:#FFF1C9; }
+  .btn-glass .btn-ic { display:inline-grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--gold); color:#221a05; font-size:14px; }
   .btn-ghost { border:1.5px solid var(--line); color:var(--ink); }
   .btn-ghost:hover { border-color:rgba(224,163,46,.5); }
   .chips { display:flex; gap:10px; flex-wrap:wrap; margin-top:38px; }
@@ -85,6 +90,7 @@
 
   /* المبادئ */
   .prin { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:42px; }
+  .glass, .p-card, .card, .store-card, .pc, .svc, .svc-strip, .step { backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
   .p-card { background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:24px; }
   .p-card .ic { width:46px; height:46px; border-radius:13px; display:grid; place-items:center;
                background:rgba(224,163,46,.12); color:var(--gold); margin-bottom:14px; }
@@ -246,7 +252,6 @@
       <a href="#pc">للحاسوب</a><a href="#services">خدماتنا</a><a href="#trust">الثقة</a>
       <a href="/en/" lang="en" hreflang="en" title="English">EN</a>
     </div>
-    <a class="nav-cta" data-store-dl href="https://dl.amanlabs.app/amanstore-1.29.3.apk">نزّل المتجر</a>
   </div>
 </nav>
 
@@ -258,14 +263,14 @@
     <h1>تطبيقاتٌ عربيةٌ تعمل لك،<br>لا عليك.</h1>
     <p class="sub">أربعة عشر تطبيقاً وُلدت في بيتٍ واحد: <b>بلا إعلانات، بلا تتبّع، بلا سحابة</b>. بياناتك تبقى على جهازك، وأكثر التطبيقات يعمل دون اتصالٍ بالإنترنت أصلاً.</p>
     <div class="ctas">
-      <a class="btn btn-gold" data-store-dl href="https://dl.amanlabs.app/amanstore-1.29.3.apk">⬇ نزّل متجر أمان (APK)</a>
+      <a class="btn btn-glass" data-store-dl href="https://dl.amanlabs.app/amanstore-1.29.4.apk"><span class="btn-ic"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span> نزّل متجر أمان</a>
       <a class="btn btn-ghost" href="#apps">تعرف على التطبيقات</a>
     </div>
     <div class="chips">
       <span class="chip"><b>14</b> تطبيقاً</span>
       <span class="chip"><b>0</b> إعلانات</span>
       <span class="chip"><b>0</b> متتبّعات</span>
-      <span class="chip"><b>100%</b> عربي أولاً</span>
+      <span class="chip"><b>0</b> حسابات</span>
     </div>
     <div class="orbit" aria-hidden="true"><div class="orbit-track"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-kalamboard"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-mihrab"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-tayf"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-album"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-hisn"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-jisr"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-kalamboard"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-mihrab"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-tayf"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-album"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-hisn"/></svg><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-jisr"/></svg></div></div>
   </div>
@@ -273,18 +278,18 @@
 
 <section id="principles">
   <div class="wrap">
-    <p class="sec-k">مبادئنا</p>
-    <h2>الخصوصية عندنا مبدأ، لا إعداد</h2>
-    <p class="lead">لا نطلب منك أن تثق بوعودنا — نبني التطبيق بحيث لا يحتاج ثقتك أصلاً.</p>
+    <p class="sec-k">لماذا تحبّها</p>
+    <h2>تطبيقات تحترمك من أول لمسة</h2>
+    <p class="lead">لا حساب تفتحه، ولا إعلان يقطعك، ولا إنترنت تنتظره — تفتح التطبيق فيعمل، وما فيه يبقى عندك.</p>
     <div class="prin">
       <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l22 22M9 9a7 7 0 0 1 10 6M5 12a11 11 0 0 1 2.6-3.4M12 20h.01M8.5 16.5a5 5 0 0 1 5.5-1"/></svg></div>
-        <h3>بلا إنترنت حيث يجب</h3><p>الوثائق والتقويم والإشعارات والسِتر: حزمها لا تحمل إذن الإنترنت أصلاً — تحقّق بنفسك من إعدادات النظام.</p></div>
+        <h3>تعمل بلا إنترنت</h3><p>الكيبورد ومواقيت الصلاة والملاحظات والمصاريف تعمل في القبو والطائرة وحين تنقطع الشبكة — لا انتظار ولا «أعد المحاولة».</p></div>
       <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3 8-10V5l-8-3-8 3v7c0 7 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3>توقيع يُفحص قبل التثبيت</h3><p>متجر أمان يطابق بصمة توقيع كل حزمة مع بصمتها المثبّتة لديه — حزمة مزوّرة لا تمرّ.</p></div>
+        <h3>لا إعلانات ولا حساب</h3><p>لا تسجيل بريد ولا رقم هاتف ولا «اشترك الآن». ولا إعلان واحد يظهر في أي تطبيق من العائلة، اليوم ولا غداً.</p></div>
       <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="9" height="14" rx="2"/><rect x="13" y="4" width="9" height="14" rx="2"/><path d="M6.5 17h.01M17.5 15h.01"/></svg></div>
-        <h3>ينتشر جهازاً لجهاز</h3><p>المتجر وتطبيقاته تُشارَك بالقرب دون إنترنت — يكفي أن يملكه صديقك ليصلك كل شيء.</p></div>
+        <h3>صورك وكلماتك تبقى عندك</h3><p>الصور والملاحظات وكلمات المرور والرسائل تُحفظ على هاتفك وحده — لا سحابة عندنا أصلاً كي تُسرَّب أو تُباع.</p></div>
       <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div>
-        <h3>عربيٌّ أولاً</h3><p>من اليمين إلى اليسار تصميماً لا ترجمةً — بخط المراعي وذوقٍ واحد يجمع العائلة كلها.</p></div>
+        <h3>تحديثاتك في مكان واحد</h3><p>متجر أمان يخبرك حين يصدر جديد ويثبّته بلمسة، ويتحقّق من كل ملف قبل تركيبه — ويمرّره لأصدقائك جهازاً لجهاز بلا إنترنت.</p></div>
     </div>
   </div>
 </section>
@@ -302,8 +307,8 @@
         <p class="d">المنصة الرسمية لتثبيت تطبيقات عائلة أمان وتحديثها. يفحص كل حزمة قبل تثبيتها، ويعمل من جهاز إلى جهاز دون حساب ولا تتبّع.</p>
       </div>
       <div class="store-cta">
-        <a class="btn btn-gold" data-store-dl href="https://dl.amanlabs.app/amanstore-1.29.3.apk">⬇ تنزيل المتجر</a>
-        <span class="meta">الإصدار <b data-v>1.29.3</b> · <span data-s>2.0 MB</span> · أندرويد 7+</span>
+        <a class="btn btn-glass" data-store-dl href="https://dl.amanlabs.app/amanstore-1.29.4.apk"><span class="btn-ic"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span> تنزيل المتجر</a>
+        <span class="meta">الإصدار <b data-v>1.29.4</b> · <span data-s>2.0 MB</span> · أندرويد 7+</span>
       </div>
     </div>
 
@@ -499,7 +504,7 @@
 
   // الكاتالوغ الحي: النسخ والأحجام والروابط تُحدَّث من المصدر نفسه الذي يقرؤه المتجر
   (function () {
-    var FB = {"org.amanlabs.store": {"v": "1.29.3", "s": 2091074, "u": "https://dl.amanlabs.app/amanstore-1.29.3.apk"}, "org.amanlabs.kalamboard": {"v": "1.3.8", "s": 12161482, "u": "https://dl.amanlabs.app/KalamBoard-1.3.8.apk"}, "org.amanlabs.mihrab": {"v": "1.0.26", "s": 6837173, "u": "https://dl.amanlabs.app/mihrab-1.0.26.apk"}, "org.amanlabs.tayf": {"v": "0.1.16", "s": 4858764, "u": "https://dl.amanlabs.app/tayf-0.1.16.apk"}, "org.amanlabs.album": {"v": "0.2.6", "s": 96112049, "u": "https://dl.amanlabs.app/album-0.2.6.apk"}, "org.amanlabs.hisn": {"v": "0.2.7", "s": 15826370, "u": "https://dl.amanlabs.app/hisn-0.2.7.apk"}, "org.amanlabs.jisr": {"v": "0.2.9", "s": 143169923, "u": "https://dl.amanlabs.app/jisr-0.2.9.apk"}};
+    var FB = {"org.amanlabs.store": {"v": "1.29.4", "s": 2091106, "u": "https://dl.amanlabs.app/amanstore-1.29.4.apk"}, "org.amanlabs.kalamboard": {"v": "1.3.8", "s": 12161482, "u": "https://dl.amanlabs.app/KalamBoard-1.3.8.apk"}, "org.amanlabs.mihrab": {"v": "1.0.26", "s": 6837173, "u": "https://dl.amanlabs.app/mihrab-1.0.26.apk"}, "org.amanlabs.tayf": {"v": "0.1.16", "s": 4858764, "u": "https://dl.amanlabs.app/tayf-0.1.16.apk"}, "org.amanlabs.album": {"v": "0.2.6", "s": 96112049, "u": "https://dl.amanlabs.app/album-0.2.6.apk"}, "org.amanlabs.hisn": {"v": "0.2.7", "s": 15826370, "u": "https://dl.amanlabs.app/hisn-0.2.7.apk"}, "org.amanlabs.jisr": {"v": "0.2.9", "s": 143169923, "u": "https://dl.amanlabs.app/jisr-0.2.9.apk"}};
     function mb(n) { return (n / 1048576).toFixed(1) + ' MB'; }
     function apply(map) {
       document.querySelectorAll('[data-pkg]').forEach(function (card) {

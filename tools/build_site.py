@@ -187,6 +187,11 @@ HTML = f'''<!doctype html>
   .btn-gold {{ background:linear-gradient(135deg,#EDB84A,var(--gold)); color:#221a05;
               box-shadow:0 8px 28px rgba(224,163,46,.28); }}
   .btn-gold:hover {{ box-shadow:0 10px 36px rgba(224,163,46,.42); transform:translateY(-2px); }}
+  .btn-glass {{ color:#F7E3AE; background:linear-gradient(135deg, rgba(224,163,46,.16), rgba(255,255,255,.04));
+               border:1px solid rgba(240,205,122,.55); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+               box-shadow:0 10px 34px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.14), 0 0 0 1px rgba(224,163,46,.12); }}
+  .btn-glass:hover {{ border-color:var(--gold); box-shadow:0 14px 40px rgba(224,163,46,.22), inset 0 1px 0 rgba(255,255,255,.18); transform:translateY(-2px); color:#FFF1C9; }}
+  .btn-glass .btn-ic {{ display:inline-grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--gold); color:#221a05; font-size:14px; }}
   .btn-ghost {{ border:1.5px solid var(--line); color:var(--ink); }}
   .btn-ghost:hover {{ border-color:rgba(224,163,46,.5); }}
   .chips {{ display:flex; gap:10px; flex-wrap:wrap; margin-top:38px; }}
@@ -202,6 +207,7 @@ HTML = f'''<!doctype html>
 
   /* المبادئ */
   .prin {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:42px; }}
+  .glass, .p-card, .card, .store-card, .pc, .svc, .svc-strip, .step {{ backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }}
   .p-card {{ background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:24px; }}
   .p-card .ic {{ width:46px; height:46px; border-radius:13px; display:grid; place-items:center;
                background:rgba(224,163,46,.12); color:var(--gold); margin-bottom:14px; }}
@@ -359,7 +365,6 @@ HTML = f'''<!doctype html>
       <a href="#pc">للحاسوب</a><a href="#services">خدماتنا</a><a href="#trust">الثقة</a>
       <a href="/en/" lang="en" hreflang="en" title="English">EN</a>
     </div>
-    <a class="nav-cta" data-store-dl href="{store['apkUrl']}">نزّل المتجر</a>
   </div>
 </nav>
 
@@ -371,14 +376,14 @@ HTML = f'''<!doctype html>
     <h1>تطبيقاتٌ عربيةٌ تعمل لك،<br>لا عليك.</h1>
     <p class="sub">أربعة عشر تطبيقاً وُلدت في بيتٍ واحد: <b>بلا إعلانات، بلا تتبّع، بلا سحابة</b>. بياناتك تبقى على جهازك، وأكثر التطبيقات يعمل دون اتصالٍ بالإنترنت أصلاً.</p>
     <div class="ctas">
-      <a class="btn btn-gold" data-store-dl href="{store['apkUrl']}">⬇ نزّل متجر أمان (APK)</a>
+      <a class="btn btn-glass" data-store-dl href="{store['apkUrl']}"><span class="btn-ic"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span> نزّل متجر أمان</a>
       <a class="btn btn-ghost" href="#apps">تعرف على التطبيقات</a>
     </div>
     <div class="chips">
       <span class="chip"><b>14</b> تطبيقاً</span>
       <span class="chip"><b>0</b> إعلانات</span>
       <span class="chip"><b>0</b> متتبّعات</span>
-      <span class="chip"><b>100%</b> عربي أولاً</span>
+      <span class="chip"><b>0</b> حسابات</span>
     </div>
     <div class="orbit" aria-hidden="true"><div class="orbit-track">{orbit_tiles}{orbit_tiles}</div></div>
   </div>
@@ -386,18 +391,18 @@ HTML = f'''<!doctype html>
 
 <section id="principles">
   <div class="wrap">
-    <p class="sec-k">مبادئنا</p>
-    <h2>الخصوصية عندنا مبدأ، لا إعداد</h2>
-    <p class="lead">لا نطلب منك أن تثق بوعودنا — نبني التطبيق بحيث لا يحتاج ثقتك أصلاً.</p>
+    <p class="sec-k">لماذا تحبّها</p>
+    <h2>تطبيقات تحترمك من أول لمسة</h2>
+    <p class="lead">لا حساب تفتحه، ولا إعلان يقطعك، ولا إنترنت تنتظره — تفتح التطبيق فيعمل، وما فيه يبقى عندك.</p>
     <div class="prin">
       <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l22 22M9 9a7 7 0 0 1 10 6M5 12a11 11 0 0 1 2.6-3.4M12 20h.01M8.5 16.5a5 5 0 0 1 5.5-1"/></svg></div>
-        <h3>بلا إنترنت حيث يجب</h3><p>الوثائق والتقويم والإشعارات والسِتر: حزمها لا تحمل إذن الإنترنت أصلاً — تحقّق بنفسك من إعدادات النظام.</p></div>
+        <h3>تعمل بلا إنترنت</h3><p>الكيبورد ومواقيت الصلاة والملاحظات والمصاريف تعمل في القبو والطائرة وحين تنقطع الشبكة — لا انتظار ولا «أعد المحاولة».</p></div>
       <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-3 8-10V5l-8-3-8 3v7c0 7 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3>توقيع يُفحص قبل التثبيت</h3><p>متجر أمان يطابق بصمة توقيع كل حزمة مع بصمتها المثبّتة لديه — حزمة مزوّرة لا تمرّ.</p></div>
+        <h3>لا إعلانات ولا حساب</h3><p>لا تسجيل بريد ولا رقم هاتف ولا «اشترك الآن». ولا إعلان واحد يظهر في أي تطبيق من العائلة، اليوم ولا غداً.</p></div>
       <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="9" height="14" rx="2"/><rect x="13" y="4" width="9" height="14" rx="2"/><path d="M6.5 17h.01M17.5 15h.01"/></svg></div>
-        <h3>ينتشر جهازاً لجهاز</h3><p>المتجر وتطبيقاته تُشارَك بالقرب دون إنترنت — يكفي أن يملكه صديقك ليصلك كل شيء.</p></div>
+        <h3>صورك وكلماتك تبقى عندك</h3><p>الصور والملاحظات وكلمات المرور والرسائل تُحفظ على هاتفك وحده — لا سحابة عندنا أصلاً كي تُسرَّب أو تُباع.</p></div>
       <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div>
-        <h3>عربيٌّ أولاً</h3><p>من اليمين إلى اليسار تصميماً لا ترجمةً — بخط المراعي وذوقٍ واحد يجمع العائلة كلها.</p></div>
+        <h3>تحديثاتك في مكان واحد</h3><p>متجر أمان يخبرك حين يصدر جديد ويثبّته بلمسة، ويتحقّق من كل ملف قبل تركيبه — ويمرّره لأصدقائك جهازاً لجهاز بلا إنترنت.</p></div>
     </div>
   </div>
 </section>
@@ -415,7 +420,7 @@ HTML = f'''<!doctype html>
         <p class="d">{store['descriptionAr']}</p>
       </div>
       <div class="store-cta">
-        <a class="btn btn-gold" data-store-dl href="{store['apkUrl']}">⬇ تنزيل المتجر</a>
+        <a class="btn btn-glass" data-store-dl href="{store['apkUrl']}"><span class="btn-ic"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span> تنزيل المتجر</a>
         <span class="meta">الإصدار <b data-v>{store['versionName']}</b> · <span data-s>{mb(store['sizeBytes'])}</span> · أندرويد 7+</span>
       </div>
     </div>
@@ -649,33 +654,32 @@ T = [
     ('مختبرات أمان</a>', 'Aman Labs</a>'),
     ('<a href="#apps">التطبيقات</a><a href="#principles">مبادئنا</a>', '<a href="#apps">Apps</a><a href="#principles">Principles</a>'),
     ('<a href="#pc">للحاسوب</a><a href="#services">خدماتنا</a><a href="#trust">الثقة</a>', '<a href="#pc">Desktop</a><a href="#services">Services</a><a href="#trust">Trust</a>'),
-    ('>نزّل المتجر</a>', '>Get the store</a>'),
+    ('<span class="btn-ic"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span> نزّل متجر أمان</a>', '<span class="btn-ic"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span> Get Aman Store</a>'),
+    ('<span class="btn-ic"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span> تنزيل المتجر</a>', '<span class="btn-ic"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span> Download the store</a>'),
     ('<p class="kicker">عائلة أمان · Aman Labs</p>', '<p class="kicker">Aman Labs · عائلة أمان</p>'),
     ('<h1>تطبيقاتٌ عربيةٌ تعمل لك،<br>لا عليك.</h1>', '<h1>Arabic apps that work for you,<br>not on you.</h1>'),
     ('<p class="sub">أربعة عشر تطبيقاً وُلدت في بيتٍ واحد: <b>بلا إعلانات، بلا تتبّع، بلا سحابة</b>. بياناتك تبقى على جهازك، وأكثر التطبيقات يعمل دون اتصالٍ بالإنترنت أصلاً.</p>',
      '<p class="sub">Fourteen apps from one house: <b>no ads, no tracking, no cloud</b>. Your data stays on your phone, and most of the apps do not even have an internet permission.</p>'),
-    ('>⬇ نزّل متجر أمان (APK)</a>', '>⬇ Download Aman Store (APK)</a>'),
     ('>تعرف على التطبيقات</a>', '>Meet the apps</a>'),
     ('<span class="chip"><b>14</b> تطبيقاً</span>', '<span class="chip"><b>14</b> apps</span>'),
     ('<span class="chip"><b>0</b> إعلانات</span>', '<span class="chip"><b>0</b> ads</span>'),
     ('<span class="chip"><b>0</b> متتبّعات</span>', '<span class="chip"><b>0</b> trackers</span>'),
-    ('<span class="chip"><b>100%</b> عربي أولاً</span>', '<span class="chip"><b>100%</b> Arabic first</span>'),
-    ('<p class="sec-k">مبادئنا</p>', '<p class="sec-k">Principles</p>'),
-    ('<h2>الخصوصية عندنا مبدأ، لا إعداد</h2>', '<h2>Privacy is a principle here, not a setting</h2>'),
-    ('<p class="lead">لا نطلب منك أن تثق بوعودنا — نبني التطبيق بحيث لا يحتاج ثقتك أصلاً.</p>', '<p class="lead">We do not ask you to trust a promise. We build the app so that it does not need your trust in the first place.</p>'),
-    ('<h3>بلا إنترنت حيث يجب</h3><p>الوثائق والتقويم والإشعارات والسِتر: حزمها لا تحمل إذن الإنترنت أصلاً — تحقّق بنفسك من إعدادات النظام.</p>',
-     '<h3>No internet where it matters</h3><p>Documents, calendar, notifications, photo vault: their packages carry no internet permission at all. Check it yourself in system settings.</p>'),
-    ('<h3>توقيع يُفحص قبل التثبيت</h3><p>متجر أمان يطابق بصمة توقيع كل حزمة مع بصمتها المثبّتة لديه — حزمة مزوّرة لا تمرّ.</p>',
-     '<h3>Signature checked before install</h3><p>Aman Store compares every package\'s signing fingerprint with the one pinned in its catalog. A forged package does not get through.</p>'),
-    ('<h3>ينتشر جهازاً لجهاز</h3><p>المتجر وتطبيقاته تُشارَك بالقرب دون إنترنت — يكفي أن يملكه صديقك ليصلك كل شيء.</p>',
-     '<h3>Spreads phone to phone</h3><p>The store and its apps can be shared nearby without internet. If a friend has it, you can have everything.</p>'),
-    ('<h3>عربيٌّ أولاً</h3><p>من اليمين إلى اليسار تصميماً لا ترجمةً — بخط المراعي وذوقٍ واحد يجمع العائلة كلها.</p>',
-     '<h3>Arabic first</h3><p>Designed right-to-left, not translated afterwards, in the Almarai typeface and one visual language across the whole family.</p>'),
+    ('<span class="chip"><b>0</b> حسابات</span>', '<span class="chip"><b>0</b> accounts</span>'),
+    ('<p class="sec-k">لماذا تحبّها</p>', '<p class="sec-k">Why people like them</p>'),
+    ('<h2>تطبيقات تحترمك من أول لمسة</h2>', '<h2>Apps that respect you from the first tap</h2>'),
+    ('<p class="lead">لا حساب تفتحه، ولا إعلان يقطعك، ولا إنترنت تنتظره — تفتح التطبيق فيعمل، وما فيه يبقى عندك.</p>', '<p class="lead">No account to open, no ad to interrupt you, no internet to wait for. Open the app and it works, and what is inside stays with you.</p>'),
+    ('<h3>تعمل بلا إنترنت</h3><p>الكيبورد ومواقيت الصلاة والملاحظات والمصاريف تعمل في القبو والطائرة وحين تنقطع الشبكة — لا انتظار ولا «أعد المحاولة».</p>',
+     '<h3>Work without internet</h3><p>Keyboard, prayer times, notes and expenses work in the basement, on a plane and when the network drops. No waiting, no "try again".</p>'),
+    ('<h3>لا إعلانات ولا حساب</h3><p>لا تسجيل بريد ولا رقم هاتف ولا «اشترك الآن». ولا إعلان واحد يظهر في أي تطبيق من العائلة، اليوم ولا غداً.</p>',
+     '<h3>No ads, no account</h3><p>No email sign-up, no phone number, no "subscribe now". Not a single ad in any app of the family, today or ever.</p>'),
+    ('<h3>صورك وكلماتك تبقى عندك</h3><p>الصور والملاحظات وكلمات المرور والرسائل تُحفظ على هاتفك وحده — لا سحابة عندنا أصلاً كي تُسرَّب أو تُباع.</p>',
+     '<h3>Your photos and words stay with you</h3><p>Photos, notes, passwords and messages live on your phone only. We have no cloud at all, so nothing can leak or be sold.</p>'),
+    ('<h3>تحديثاتك في مكان واحد</h3><p>متجر أمان يخبرك حين يصدر جديد ويثبّته بلمسة، ويتحقّق من كل ملف قبل تركيبه — ويمرّره لأصدقائك جهازاً لجهاز بلا إنترنت.</p>',
+     '<h3>Updates in one place</h3><p>Aman Store tells you when something new is out, installs it in one tap, checks every file before installing, and passes apps to friends phone to phone without internet.</p>'),
     ('<p class="sec-k">العائلة</p>', '<p class="sec-k">The family</p>'),
     ('<h2>أربعة عشر فرداً، بيتٌ واحد</h2>', '<h2>Fourteen members, one house</h2>'),
     ('<p class="lead">كل تطبيقٍ يسدّ حاجةً يومية حقيقية — ويشارك إخوته المبدأ نفسه: بياناتك ملكك وحدك.</p>', '<p class="lead">Each app covers a real daily need, and shares the same rule with its siblings: your data belongs to you alone.</p>'),
     ('<h3>متجر أمان <span class="en">· Aman Store</span></h3>', '<h3>Aman Store <span class="en">· متجر أمان</span></h3>'),
-    ('>⬇ تنزيل المتجر</a>', '>⬇ Download the store</a>'),
     ('<span class="meta">الإصدار <b data-v>', '<span class="meta">Version <b data-v>'),
     (' · أندرويد 7+</span>', ' · Android 7+</span>'),
     ('<p class="sec-k">للحاسوب</p>', '<p class="sec-k">Desktop</p>'),
@@ -721,7 +725,7 @@ T = [
     ("esc(a.summaryAr || '')", "esc(a.summaryEn || a.summaryAr || '')"),
     ('rel="nofollow">تنزيل APK</a>', 'rel="nofollow">Download APK</a>'),
     ("s.title = 'عدد التنزيلات';", "s.title = 'downloads';"),
-    ("'<small>تنزيل</small>'", "'<small>downloads</small>'"),
+    ("<small>تنزيل</small>'", "<small>downloads</small>'"),
 ]
 HTML_EN = HTML
 HTML_EN = HTML_EN.replace(CARDS, CARDS_EN, 1)
