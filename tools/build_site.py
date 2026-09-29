@@ -67,7 +67,8 @@ def teaser_card(idx):
 def build_cards(lang):
     ar = lang == "ar"
     out = []
-    for a in members:
+    # المتاح للتنزيل أولاً، ثم الأعضاء المغبَّشون (طلب المالك 2026-09-29)
+    for a in sorted(members, key=lambda m: (1 if m.get("hidden") else 0, m["index"])):
         if a.get("hidden"):
             out.append(teaser_card(a["index"]) if ar else teaser_card_en(a["index"]))
             continue
@@ -314,7 +315,8 @@ HTML = f'''<!doctype html>
                padding:20px 24px; display:flex; gap:18px; align-items:center; flex-wrap:wrap; }}
   .svc-strip p {{ color:var(--muted); font-size:13.5px; max-width:46em; }}
   .svc-strip b {{ color:var(--ink); }}
-  .svc-strip a {{ margin-inline-start:auto; color:var(--gold); font-size:13.5px; font-weight:800;
+  .svc-strip {{ flex-direction:column; align-items:flex-start; gap:12px; }}
+  .svc-strip a {{ margin-inline-start:0; color:var(--gold); font-size:13.5px; font-weight:800;
                  border-bottom:1px dashed rgba(224,163,46,.4); padding-bottom:2px; white-space:nowrap; }}
 
   footer {{ padding:52px 0 40px; border-top:1px solid var(--line); }}
@@ -401,7 +403,7 @@ HTML = f'''<!doctype html>
         <h3>لا إعلانات ولا حساب</h3><p>لا تسجيل بريد ولا رقم هاتف ولا «اشترك الآن». ولا إعلان واحد يظهر في أي تطبيق من العائلة، اليوم ولا غداً.</p></div>
       <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="9" height="14" rx="2"/><rect x="13" y="4" width="9" height="14" rx="2"/><path d="M6.5 17h.01M17.5 15h.01"/></svg></div>
         <h3>صورك وكلماتك تبقى عندك</h3><p>الصور والملاحظات وكلمات المرور والرسائل تُحفظ على هاتفك وحده — لا سحابة عندنا أصلاً كي تُسرَّب أو تُباع.</p></div>
-      <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div>
+      <div class="p-card reveal"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v10M8 9l4 4 4-4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
         <h3>تحديثاتك في مكان واحد</h3><p>متجر أمان يخبرك حين يصدر جديد ويثبّته بلمسة، ويتحقّق من كل ملف قبل تركيبه — ويمرّره لأصدقائك جهازاً لجهاز بلا إنترنت.</p></div>
     </div>
   </div>
