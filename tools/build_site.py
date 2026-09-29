@@ -158,6 +158,15 @@ HTML = f'''<!doctype html>
   .nav-cta {{ background:var(--gold); color:#221a05; font-weight:800; font-size:13.5px;
              padding:8px 18px; border-radius:999px; white-space:nowrap; }}
   .nav-cta:hover {{ background:#EDB84A; }}
+  /* زرّ القائمة (هاتف): ثلاث شرطات، لا يظهر على الشاشات العريضة */
+  .nav-burger {{ display:none; margin-inline-start:auto; width:42px; height:42px; border-radius:12px;
+    border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--ink); cursor:pointer;
+    align-items:center; justify-content:center; flex-direction:column; gap:5px; padding:0; }}
+  .nav-burger i {{ display:block; width:18px; height:2px; background:currentColor; border-radius:2px; transition:transform .25s, opacity .25s; }}
+  .nav-burger[aria-expanded="true"] i:nth-child(1) {{ transform:translateY(7px) rotate(45deg); }}
+  .nav-burger[aria-expanded="true"] i:nth-child(2) {{ opacity:0; }}
+  .nav-burger[aria-expanded="true"] i:nth-child(3) {{ transform:translateY(-7px) rotate(-45deg); }}
+  .nav-scrim {{ display:none; position:fixed; inset:0; z-index:45; background:rgba(0,0,0,.45); }}
 
   /* ══ hero ══ */
   header {{ position:relative; min-height:min(100svh, 940px); display:flex; align-items:center; overflow:hidden;
@@ -340,7 +349,15 @@ HTML = f'''<!doctype html>
   @keyframes orbitflow {{ from {{ transform:translateX(0); }} to {{ transform:translateX(-50%); }} }}
 
   @media (max-width: 900px) {{
-    .navlinks {{ display:none; }}
+    .nav-burger {{ display:flex; }}
+    /* الروابط تصير لوحةً منسدلة تحت الشريط، تُفتح بزرّ القائمة */
+    .navlinks {{ display:none; position:fixed; top:63px; inset-inline:0; z-index:50; flex-direction:column; gap:0;
+      margin:0; padding:6px 22px 14px; background:rgba(11,14,21,.97); border-bottom:1px solid var(--line);
+      font-size:17px; backdrop-filter:blur(14px); }}
+    .navlinks.open {{ display:flex; }}
+    .navlinks a {{ padding:13px 0; border-bottom:1px solid var(--line); color:var(--ink); }}
+    .navlinks a:last-child {{ border-bottom:0; color:var(--gold); font-weight:800; }}
+    .nav-scrim.open {{ display:block; }}
     .trust-in {{ grid-template-columns:1fr; }}
     .orb {{ display:none; }}
     .orbit {{ display:block; }}
@@ -362,13 +379,15 @@ HTML = f'''<!doctype html>
 <nav>
   <div class="nav-in">
     <a class="brand" href="#top">{tile("store")} مختبرات أمان</a>
-    <div class="navlinks">
+    <button class="nav-burger" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="navlinks"><i></i><i></i><i></i></button>
+    <div class="navlinks" id="navlinks">
       <a href="#apps">التطبيقات</a><a href="#principles">مبادئنا</a>
       <a href="#pc">للحاسوب</a><a href="#services">خدماتنا</a><a href="#trust">الثقة</a>
       <a href="/en/" lang="en" hreflang="en" title="English">EN</a>
     </div>
   </div>
 </nav>
+<div class="nav-scrim" id="navscrim"></div>
 
 <header id="top">
   <div class="stars" aria-hidden="true"></div>
@@ -527,6 +546,16 @@ HTML = f'''<!doctype html>
 </footer>
 
 <script>
+  // قائمة الهاتف: زرّ يفتح لوحة الروابط، وتنغلق بلمس رابطٍ أو خارجها
+  (function () {{
+    var b = document.querySelector('.nav-burger'), l = document.getElementById('navlinks'), sc = document.getElementById('navscrim');
+    if (!b || !l) return;
+    function set(o) {{ l.classList.toggle('open', o); sc.classList.toggle('open', o); b.setAttribute('aria-expanded', o ? 'true' : 'false'); }}
+    b.addEventListener('click', function () {{ set(!l.classList.contains('open')); }});
+    sc.addEventListener('click', function () {{ set(false); }});
+    l.addEventListener('click', function (e) {{ if (e.target.tagName === 'A') set(false); }});
+    window.addEventListener('resize', function () {{ if (window.innerWidth > 900) set(false); }});
+  }})();
   // نجوم البطل
   (function () {{
     var host = document.querySelector('.stars');
@@ -654,6 +683,7 @@ T = [
     ('<link rel="canonical" href="https://amanlabs.app/">', '<link rel="canonical" href="https://amanlabs.app/en/">'),
     ('<a href="/en/" lang="en" hreflang="en" title="English">EN</a>', '<a href="/" lang="ar" hreflang="ar" title="العربية">عربي</a>'),
     ('مختبرات أمان</a>', 'Aman Labs</a>'),
+    ('aria-label="القائمة"', 'aria-label="Menu"'),
     ('<a href="#apps">التطبيقات</a><a href="#principles">مبادئنا</a>', '<a href="#apps">Apps</a><a href="#principles">Principles</a>'),
     ('<a href="#pc">للحاسوب</a><a href="#services">خدماتنا</a><a href="#trust">الثقة</a>', '<a href="#pc">Desktop</a><a href="#services">Services</a><a href="#trust">Trust</a>'),
     ('<span class="btn-ic"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span> نزّل متجر أمان</a>', '<span class="btn-ic"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span> Get Aman Store</a>'),

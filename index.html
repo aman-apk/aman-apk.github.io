@@ -40,6 +40,15 @@
   .nav-cta { background:var(--gold); color:#221a05; font-weight:800; font-size:13.5px;
              padding:8px 18px; border-radius:999px; white-space:nowrap; }
   .nav-cta:hover { background:#EDB84A; }
+  /* زرّ القائمة (هاتف): ثلاث شرطات، لا يظهر على الشاشات العريضة */
+  .nav-burger { display:none; margin-inline-start:auto; width:42px; height:42px; border-radius:12px;
+    border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--ink); cursor:pointer;
+    align-items:center; justify-content:center; flex-direction:column; gap:5px; padding:0; }
+  .nav-burger i { display:block; width:18px; height:2px; background:currentColor; border-radius:2px; transition:transform .25s, opacity .25s; }
+  .nav-burger[aria-expanded="true"] i:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .nav-burger[aria-expanded="true"] i:nth-child(2) { opacity:0; }
+  .nav-burger[aria-expanded="true"] i:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  .nav-scrim { display:none; position:fixed; inset:0; z-index:45; background:rgba(0,0,0,.45); }
 
   /* ══ hero ══ */
   header { position:relative; min-height:min(100svh, 940px); display:flex; align-items:center; overflow:hidden;
@@ -222,7 +231,15 @@
   @keyframes orbitflow { from { transform:translateX(0); } to { transform:translateX(-50%); } }
 
   @media (max-width: 900px) {
-    .navlinks { display:none; }
+    .nav-burger { display:flex; }
+    /* الروابط تصير لوحةً منسدلة تحت الشريط، تُفتح بزرّ القائمة */
+    .navlinks { display:none; position:fixed; top:63px; inset-inline:0; z-index:50; flex-direction:column; gap:0;
+      margin:0; padding:6px 22px 14px; background:rgba(11,14,21,.97); border-bottom:1px solid var(--line);
+      font-size:17px; backdrop-filter:blur(14px); }
+    .navlinks.open { display:flex; }
+    .navlinks a { padding:13px 0; border-bottom:1px solid var(--line); color:var(--ink); }
+    .navlinks a:last-child { border-bottom:0; color:var(--gold); font-weight:800; }
+    .nav-scrim.open { display:block; }
     .trust-in { grid-template-columns:1fr; }
     .orb { display:none; }
     .orbit { display:block; }
@@ -248,13 +265,15 @@
 <nav>
   <div class="nav-in">
     <a class="brand" href="#top"><svg class="tile " viewBox="0 0 108 108" aria-hidden="true"><use href="#i-store"/></svg> مختبرات أمان</a>
-    <div class="navlinks">
+    <button class="nav-burger" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="navlinks"><i></i><i></i><i></i></button>
+    <div class="navlinks" id="navlinks">
       <a href="#apps">التطبيقات</a><a href="#principles">مبادئنا</a>
       <a href="#pc">للحاسوب</a><a href="#services">خدماتنا</a><a href="#trust">الثقة</a>
       <a href="/en/" lang="en" hreflang="en" title="English">EN</a>
     </div>
   </div>
 </nav>
+<div class="nav-scrim" id="navscrim"></div>
 
 <header id="top">
   <div class="stars" aria-hidden="true"></div>
@@ -490,6 +509,16 @@
 </footer>
 
 <script>
+  // قائمة الهاتف: زرّ يفتح لوحة الروابط، وتنغلق بلمس رابطٍ أو خارجها
+  (function () {
+    var b = document.querySelector('.nav-burger'), l = document.getElementById('navlinks'), sc = document.getElementById('navscrim');
+    if (!b || !l) return;
+    function set(o) { l.classList.toggle('open', o); sc.classList.toggle('open', o); b.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+    b.addEventListener('click', function () { set(!l.classList.contains('open')); });
+    sc.addEventListener('click', function () { set(false); });
+    l.addEventListener('click', function (e) { if (e.target.tagName === 'A') set(false); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 900) set(false); });
+  })();
   // نجوم البطل
   (function () {
     var host = document.querySelector('.stars');
