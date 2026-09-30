@@ -109,8 +109,8 @@ WIN_SETUP = "https://dl.amanlabs.app/jisr-0.2.9-windows-x64-setup.exe"
 WIN_ZIP   = "https://dl.amanlabs.app/jisr-0.2.9-windows-x64-portable.zip"
 # طيف لسطح المكتب (2026-09-08): كروميوم حقيقي عبر CEF، لا صفحة ويب في إطار.
 # مثبّت exe لا msi: مرآة كلاودفلير تخدم apk/exe/zip فقط (worker.js)
-TAYF_WIN_SETUP = "https://dl.amanlabs.app/tayf-desktop-0.1.12-windows-x64-setup.exe"
-TAYF_WIN_ZIP   = "https://dl.amanlabs.app/tayf-desktop-0.1.12-windows-x64-portable.zip"
+TAYF_WIN_SETUP = "https://dl.amanlabs.app/tayf-desktop-0.1.22-windows-x64-setup.exe"
+TAYF_WIN_ZIP   = "https://dl.amanlabs.app/tayf-desktop-0.1.22-windows-x64-portable.zip"
 
 from urllib.parse import quote
 WA_REQUEST = "https://wa.me/963943558806?text=" + quote("طلب مشروع خاص: ")
